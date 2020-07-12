@@ -1,0 +1,6 @@
+<ul *ngFor="let child of parentChildren" style="padding-bottom:5px">
+    <li>name: {{child.name}}</li>
+    <li>age: {{child.age}}</li>
+    <li>gender: {{child.gender}}</li>
+    <li *ngIf="child.children.length === 0">children: No children</li>
+</ul>

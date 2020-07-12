@@ -10,7 +10,7 @@ import { ParentChild } from '../../../interface/parent-child';
 export class ParentComponent implements OnInit {
 
   parentChild: ParentChild[];
-
+  parentTitle: string = 'Parent Title';
 
   constructor(private parentChildService: ParentChildService) { }
 

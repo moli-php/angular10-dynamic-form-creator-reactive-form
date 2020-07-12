@@ -1,1 +1,10 @@
-<p>parent works!</p>
+<h2>{{parentTitle}}</h2>
+<a href="/" class="btn">back</a>
+
+<ul *ngFor="let parentItem of parentChild">
+    <li>id : {{parentItem.id}}</li>
+    <li>name : {{parentItem.name}}</li>
+    <li>age : {{parentItem.age}}</li>
+    <li>gender : {{parentItem.gender}}</li>
+    <li>Children : <app-child [parentChildren]="parentItem.children"></app-child></li>
+</ul>
