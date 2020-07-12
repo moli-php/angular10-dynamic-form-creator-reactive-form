@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { DefaultComponent } from './default/default.component';
+import { ParentChildModule } from './modules/parent-child/parent-child.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { DefaultComponent } from './default/default.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ParentChildModule
   ],
   providers: [],
   bootstrap: [AppComponent]
