@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../service/api.service';
+import { DummyService } from '../../../service/dummy.service';
 
 @Component({
   selector: 'app-sample',
@@ -11,12 +12,14 @@ export class SampleComponent implements OnInit {
   awaitData: any;
   observableData: any;
 
-  constructor(private apiService: ApiService ) { }
+  constructor(private apiService: ApiService, private dummyService: DummyService ) { }
 
   ngOnInit(): void {
     this.getSample();
     this.getAwaitSample();
     this.withDelay();
+    this.dummyService.getUser();
+    this.dummyService.myPromise();
   }
 
   private getSample() {
@@ -37,6 +40,8 @@ export class SampleComponent implements OnInit {
   private withDelay() {
     this.apiService.getDelaySample().subscribe(sample => console.log('delay', sample));
   }
+
+
 
 
 

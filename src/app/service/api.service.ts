@@ -20,8 +20,6 @@ export class ApiService {
   }
 
   getSample(): Observable<any>  {
-    //return this.http.get(this.endPoint + 'dummy/sample', this.options);
-    //return this.http.get('http://localhost/sample_data.php', this.options);
     return this.http.get(this.endPoint + 'dummy/sample', this.options);
   }
 
