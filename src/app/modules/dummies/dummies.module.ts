@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SampleComponent } from './sample/sample.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from '../../auth/jwt.interceptor';
+import { DummiesComponent } from './dummies/dummies.component';
+import { ApiComponent } from './api/api.component';
 
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
-  declarations: [SampleComponent],
+  declarations: [DummiesComponent, ApiComponent],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule
   ],
   providers: [
     {

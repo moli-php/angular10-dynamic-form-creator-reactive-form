@@ -1,0 +1,15 @@
+<p>api works!</p>
+
+<div>{{observableLoading}}</div>
+<div *ngIf="!observableLoading">observable data :  {{observableData | json}}</div>
+
+<div>{{awaitLoading}}</div>
+<div *ngIf="!awaitLoading">async await data :  {{awaitData | json}}</div>
+
+<div>{{promiseLoading}}</div>
+<div *ngIf="!promiseLoading">promise data : {{promiseData | json}}</div>
+
+<p *ngIf="!awaitLoading">
+    <button routerLink="/dummies">Back</button>
+</p>
+
