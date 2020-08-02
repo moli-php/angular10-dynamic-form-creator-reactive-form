@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiService {
-  endPoint: string = 'http://laravel.local/api/';
+  endPoint: string = 'http://laravel5.4.local/api/';
   options: any;
 
   constructor(private http: HttpClient) {
