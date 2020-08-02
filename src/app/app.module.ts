@@ -8,6 +8,8 @@ import { DefaultComponent } from './default/default.component';
 import { ParentChildModule } from './modules/parent-child/parent-child.module';
 import { HeroesModule } from './modules/heroes/heroes.module';
 import { DummiesModule } from './modules/dummies/dummies.module';
+import { BindingModule } from './modules/binding/binding.module';
+
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -22,7 +24,8 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     ParentChildModule,
     HeroesModule,
-    DummiesModule
+    DummiesModule,
+    BindingModule
   ],
   providers: [
     //{provide: LocationStrategy, useClass: HashLocationStrategy}

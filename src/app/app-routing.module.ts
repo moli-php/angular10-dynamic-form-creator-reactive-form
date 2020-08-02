@@ -12,6 +12,7 @@ import { SecretComponent } from './modules/dummies/secret/secret.component';
 import { AuthGuard } from './service/auth.guard';
 import { AuthAdminGuard} from './service/auth-admin.guard';
 import { AdminComponent } from './modules/dummies/admin/admin.component';
+import { BindingComponent } from './modules/binding/binding.component';
 
 const ROUTES: Routes = [
     { path: '', component: DefaultComponent, pathMatch: 'full' },
@@ -25,6 +26,7 @@ const ROUTES: Routes = [
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AuthAdminGuard]},
     { path: 'secret', component: SecretComponent, canActivate: [AuthGuard]},
     { path: 'lazy-load', loadChildren: () => import('./modules/lazy-load/lazy-load.module').then(m => m.LazyLoadModule) },
+    { path: 'binding', component: BindingComponent },
     { path: '**', redirectTo: ''}
 ];
 

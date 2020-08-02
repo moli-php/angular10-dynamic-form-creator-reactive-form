@@ -1,0 +1,24 @@
+<p>binding works!</p>
+
+<h3>by component</h3>
+<!-- '#hello' is the sideBarComponent itself and passed it to 
+    sideBarToggleComponent with 'hello' as reference -->
+<app-side-bar-toggle [sideBarComponent]="hello"></app-side-bar-toggle>
+<app-side-bar #hello></app-side-bar>
+<hr>
+
+<h3>by parent</h3>
+<app-side-bar-toggle2 (toggle)="toggleSideBar()"></app-side-bar-toggle2>
+<app-side-bar2 [isOpen]="sideBarIsOpened"></app-side-bar2>
+<br><br>
+<button (click)="toggleSideBar()">Toggle sidebar from binding component</button>
+<hr>
+
+<h3>by service</h3>
+<app-side-bar-toggle3></app-side-bar-toggle3>
+<app-side-bar3></app-side-bar3>
+<br>
+<a routerLink="/dummies">Back</a>
+
+
+
