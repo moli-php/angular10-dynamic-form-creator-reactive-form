@@ -11,11 +11,13 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
 import { AuthGuard } from '../../service/auth.guard';
 import { AdminComponent } from './admin/admin.component';
+import { DirectiveComponent } from './directive/directive.component';
+import { MyHighlightDirective } from './directive/my-highlight.directive';
 
 
 
 @NgModule({
-  declarations: [DummiesComponent, ApiComponent, LoginComponent, SecretComponent, AdminComponent],
+  declarations: [DummiesComponent, ApiComponent, LoginComponent, SecretComponent, AdminComponent, DirectiveComponent, MyHighlightDirective],
   imports: [
     CommonModule,
     HttpClientModule,

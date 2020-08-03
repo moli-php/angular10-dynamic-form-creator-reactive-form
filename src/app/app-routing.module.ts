@@ -13,6 +13,7 @@ import { AuthGuard } from './service/auth.guard';
 import { AuthAdminGuard} from './service/auth-admin.guard';
 import { AdminComponent } from './modules/dummies/admin/admin.component';
 import { BindingComponent } from './modules/binding/binding.component';
+import { DirectiveComponent } from './modules/dummies/directive/directive.component';
 
 const ROUTES: Routes = [
     { path: '', component: DefaultComponent, pathMatch: 'full' },
@@ -21,6 +22,7 @@ const ROUTES: Routes = [
     { path: 'heroes', component: HeroesComponent },
     { path: 'heroes/:id', component: HeroComponent },
     { path: 'dummies', component: DummiesComponent},
+    { path: 'directive', component: DirectiveComponent },
     { path: 'api', component: ApiComponent},
     { path: 'login', component: LoginComponent},
     { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AuthAdminGuard]},

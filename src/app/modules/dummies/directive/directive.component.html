@@ -1,0 +1,13 @@
+<div>
+    <label><input type="radio" name="colors" (click)="color='lightgreen'">Green</label>
+    <label><input type="radio" name="colors" (click)="color='yellow'">Yellow</label>
+    <label><input type="radio" name="colors" (click)="color='cyan'">Cyan</label>
+  </div>
+
+<h1 [appMyHighlight]="color" defaultColor="violet">directive works!</h1>
+<h1 appMyHighlight defaultColor="violet">no alias</h1>
+<h1 appMyHighlight>no alias and default color</h1>
+
+<br><br>
+
+<a href="/dummies">Back</a>

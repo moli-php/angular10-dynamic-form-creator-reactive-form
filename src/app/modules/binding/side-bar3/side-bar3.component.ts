@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, HostListener } from '@angular/core';
 import { SideBarService } from './side-bar.service';
 
 @Component({
@@ -8,7 +8,14 @@ import { SideBarService } from './side-bar.service';
 })
 export class SideBar3Component implements OnInit {
   @HostBinding('class.is-open') isOpen = false;
+  @HostListener('mouseenter') onMouseEnter() {
+    this.myColor = true;
+  }
+  @HostListener('mouseleave') onLeave() {
+    this.myColor = false;
+  }
   tagName: string = '';
+  myColor: boolean = false;
 
   constructor(private sideBarService: SideBarService) { }
 

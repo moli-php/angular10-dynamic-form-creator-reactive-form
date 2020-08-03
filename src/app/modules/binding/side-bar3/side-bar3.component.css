@@ -13,3 +13,7 @@
 :host.is-open {
     display: block;
 }
+
+.hasColor {
+    color: red;
+}
