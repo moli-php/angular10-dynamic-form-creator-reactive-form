@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from '../../auth/jwt.interceptor';
-import { DummiesComponent } from './dummies/dummies.component';
+import { DummiesComponent } from './dummies.component';
 import { ApiComponent } from './api/api.component';
 import { LoginComponent } from './login/login.component';
 import { SecretComponent } from './secret/secret.component';
@@ -13,15 +13,26 @@ import { AuthGuard } from '../../service/auth.guard';
 import { AdminComponent } from './admin/admin.component';
 import { DirectiveComponent } from './directive/directive.component';
 import { MyHighlightDirective } from './directive/my-highlight.directive';
+import { DummiesRoutingModule } from './dummies-routing.module';
+import { ParentChildComponent } from './parent-child/parent-child.component';
 
 
 
 @NgModule({
-  declarations: [DummiesComponent, ApiComponent, LoginComponent, SecretComponent, AdminComponent, DirectiveComponent, MyHighlightDirective],
+  declarations: [
+    DummiesComponent,
+    ApiComponent, 
+    LoginComponent, 
+    SecretComponent, 
+    AdminComponent, 
+    DirectiveComponent, 
+    MyHighlightDirective
+  ],
   imports: [
     CommonModule,
     HttpClientModule,
     RouterModule,
+    DummiesRoutingModule,
     FormsModule
   ],
   providers: [
