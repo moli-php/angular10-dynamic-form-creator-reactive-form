@@ -14,7 +14,15 @@
     display: block;
 }
 
-:host.my-custom-color {
-    color: #ff0909;
-    font-weight: bold;
+:host-context(.my-elem) h1 {
+    color: red;
+}
+
+/* :host-context(.my-elem2) h2 {
+    color: yellowgreen;
+} */
+
+
+:host.my-elem2 h2 {
+    color: blueviolet;
 }

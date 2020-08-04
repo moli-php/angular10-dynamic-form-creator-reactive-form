@@ -1,10 +1,1 @@
-:host {
-    display: inline-block;
-    background-color: #ccc;
-    padding: 10px;
-    cursor: pointer;
-}
-
-:host:hover {
-    background: #ddd;
-}
+@import '../side-bar-toggle/side-bar-toggle.component.css';
