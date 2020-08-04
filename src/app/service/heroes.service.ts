@@ -11,9 +11,9 @@ export class HeroesService extends SuperHeroService {
 
   constructor() {
     super();
-    console.log(this.bestHero());
+    // console.log(this.bestHero());
     this.superHeroes().subscribe(heroes => {
-      console.log(heroes);
+      // console.log(heroes);
     })
   }
 

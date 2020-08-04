@@ -1,0 +1,14 @@
+<p>parent-child works!</p>
+<button (click)="toggle('basic')">toggle basic</button>
+<app-parent *ngIf="basic"></app-parent>
+
+<br><button (click)="toggle('interact')">Parent interact with child</button>
+<app-interact-parent *ngIf="interact"></app-interact-parent>
+
+<br><button (click)="toggle('listen')">Parent listen to child</button>
+<app-listen-parent *ngIf="listen"></app-listen-parent>
+
+
+
+
+<br><a routerLink="/">back</a>

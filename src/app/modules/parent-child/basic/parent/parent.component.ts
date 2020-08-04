@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ParentChildService } from '../../../service/parent-child.service';
-import { ParentChild } from '../../../interface/parent-child';
+import { ParentChildService } from '../../../../service/parent-child.service';
+import { ParentChild } from '../../../../interface/parent-child';
 
 @Component({
   selector: 'app-parent',
@@ -10,7 +10,7 @@ import { ParentChild } from '../../../interface/parent-child';
 export class ParentComponent implements OnInit {
 
   parentChild: ParentChild[];
-  parentTitle: string = 'Parent Title';
+  parentTitle: string = 'Basic';
 
   constructor(private parentChildService: ParentChildService) { }
 

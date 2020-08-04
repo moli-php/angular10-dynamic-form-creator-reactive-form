@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ParentChild } from '../../../interface/parent-child';
-//import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ParentChild } from '../../../../interface/parent-child';
 
 @Component({
   selector: 'app-child',
