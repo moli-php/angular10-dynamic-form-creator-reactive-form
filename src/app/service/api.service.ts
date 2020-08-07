@@ -31,5 +31,14 @@ export class ApiService {
     return this.http.get(this.endPoint + 'dummy/sample-await', this.options);
   }
 
+  public searchContent(reqData): Observable<object> {
+    return this.http.post(this.endPoint + 'dummy/search-content', JSON.stringify(reqData), this.options);
+  }
+
+  // public login(reqData): Observable<any> {
+  //   return this.http.post(this.endPoint + 'dummy/login', JSON.stringify(reqData), this.options);
+  // }
+
+
 
 }

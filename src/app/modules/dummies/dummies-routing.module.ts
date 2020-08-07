@@ -8,6 +8,9 @@ import { ApiComponent } from './api/api.component';
 import { DirectiveComponent } from './directive/directive.component';
 import { LoginComponent } from './login/login.component';
 import { SecretComponent } from './secret/secret.component';
+import { SearchDbComponent } from './search-db/search-db.component';
+import { FormComponent } from './form/form.component';
+
 
 const routes: Routes = [
   { path: '', component: DummiesComponent },
@@ -16,6 +19,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AuthAdminGuard]},
   { path: 'secret', component: SecretComponent, canActivate: [AuthGuard]},
+  { path: 'search-db', component: SearchDbComponent },
+  { path: 'form', component: FormComponent }
 ];
 
 @NgModule({

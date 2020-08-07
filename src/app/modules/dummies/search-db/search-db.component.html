@@ -1,0 +1,61 @@
+<p>search-db works!</p>
+
+    <!-- <input class="form-control" type="text" [(ngModel)]="name" name="name" placeholder="search name" (keypress)="onSubmit()" /> -->
+    <!-- <input name="name" (change)="filter$.next($event)" placeholder="search name" (keypress)="onChange($event)" /> -->
+    <!-- <input name="name" placeholder="search name" (keypress)="onChange($event)" /> -->
+
+    <!-- <input name="name" placeholder="search name" (keyup)="searchContent($event.target.value)" /> -->
+
+   <h2>with reactive form Subject observable</h2>
+    <form [formGroup]="contentForm">
+        <label>Name:
+            <input formControlName="name">
+            <!-- <input formControlName="name" (keyup)="searchContent()"> -->
+        </label>
+        <label>Title:
+            <input formControlName="title">
+            <!-- <input formControlName="title" (keyup)="searchContent()"> -->
+        </label>
+    </form>
+    <hr>
+    <h2>with reactive form observable</h2>
+    <form [formGroup]="contentForm2">
+        <label>Name:
+            <input formControlName="name">
+        </label>
+        <label>Title:
+            <input formControlName="title">
+        </label>
+    </form>
+    <hr>
+    <h2>without observable</h2>
+    <form [formGroup]="contentForm3">
+        <label>Name:
+            <input formControlName="name" (keyup)="onKeyUp($event)">
+        </label>
+        <label>Title:
+            <input formControlName="title" (keyup)="onKeyUp($event)">
+        </label>
+    </form>
+
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Title</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="!loading">
+        <tr *ngFor="let item of contentData; let i = index;">
+            <td>{{i + 1}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.title}}</td>
+        </tr>
+    </tbody>
+</table>
+<div class="sm-spinner" *ngIf="loading"></div>
+
+<br><br>
+
+<a routerLink="/dummies">Back</a>

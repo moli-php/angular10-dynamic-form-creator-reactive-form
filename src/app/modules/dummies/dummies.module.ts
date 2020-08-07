@@ -7,14 +7,16 @@ import { ApiComponent } from './api/api.component';
 import { LoginComponent } from './login/login.component';
 import { SecretComponent } from './secret/secret.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AuthService } from '../../service/auth.service';
 import { AuthGuard } from '../../service/auth.guard';
 import { AdminComponent } from './admin/admin.component';
 import { DirectiveComponent } from './directive/directive.component';
 import { MyHighlightDirective } from './directive/my-highlight.directive';
 import { DummiesRoutingModule } from './dummies-routing.module';
-import { ParentChildComponent } from './parent-child/parent-child.component';
+import { SearchDbComponent } from './search-db/search-db.component';
+import { FormComponent } from './form/form.component';
 
 
 
@@ -26,14 +28,15 @@ import { ParentChildComponent } from './parent-child/parent-child.component';
     SecretComponent, 
     AdminComponent, 
     DirectiveComponent, 
-    MyHighlightDirective
+    MyHighlightDirective, SearchDbComponent, FormComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     RouterModule,
     DummiesRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     AuthService,

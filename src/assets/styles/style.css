@@ -1,0 +1,136 @@
+/*Customize angular-loading-bar*/
+#loading-bar .bar {
+    /*background: #000000;*/
+    /*height: 5px;*/
+}
+
+/*spinner*/
+.loading-fb{
+    background-image: url("images/facebook.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.bg-spinner{
+    background-image: url("images/spin.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 300px;
+}
+
+.sm-spinner {
+    background-image: url("images/spin.gif");
+    background-repeat: no-repeat;
+    background-size: 50px;
+    width: 50%;
+    height: 50px;
+}
+.breadcrumb-padding{
+    padding: 8px 15px;
+}
+
+/*table  header sorting*/
+table>thead.sorting> tr th.both{
+    background-image: url("images/jq_sort_both.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    cursor:pointer;
+}
+
+table>thead.sorting> tr th.desc{
+    background-image: url("images/jq_sort_desc.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    cursor:pointer;
+}
+
+table>thead.sorting> tr th.asc{
+    background-image: url("images/jq_sort_asc.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    cursor:pointer;
+}
+
+table>thead.sorting> tr th{
+    padding-left: 15px;
+}
+
+/*Override bootstrap label */
+label{
+    color: #000;
+}
+
+.jumbotron h1 {
+    font-size: 30px;
+}
+
+.table>tbody>tr>td p{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    vertical-align: middle;
+}
+
+.pagination{
+    vertical-align: middle;
+}
+
+.pagination-number{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.angucomplete-image{
+    width: 20px;
+    height: 20px;
+}
+
+pre.note{
+    border: none;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.62);
+    background-color: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.staging-background{
+    background-color: #FEE58B;
+}
+
+.navbar {
+    background-color: #1E3869;
+}
+.navbar img {
+    -webkit-filter: brightness(10);
+    filter: brightness(10);
+}
+
+.mb_cycle_phase_col1, .mb_cycle_phase_col2 {
+    display: inline-block;
+}
+.mb_cycle_phase_col1 {
+    width:5%
+}
+.mb_cycle_phase_col2 {
+    width:94%;
+    vertical-align: middle;
+}
+.modal-dialog.modal-lg .modal-content {
+    background:#f6f6f6;
+}
+
+#company-name_dropdown .angucomplete-title {
+    font-weight: bold;
+}
+
+#company-domain-error-container {
+    margin-left : 35px;
+    padding: 7px 0;
+}
