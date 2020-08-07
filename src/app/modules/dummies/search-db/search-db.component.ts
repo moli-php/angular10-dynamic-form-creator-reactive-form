@@ -47,7 +47,9 @@ export class SearchDbComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.contentObv.unsubscribe();
+    if (this.contentObv) {
+      this.contentObv.unsubscribe();
+    }
   }
   // can handle empty values
   oneWayWork() {
