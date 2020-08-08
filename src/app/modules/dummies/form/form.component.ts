@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray  } from '@angular/forms';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -36,23 +35,26 @@ export class FormComponent implements OnInit {
     ])
 
   });
-  get favorites() {
-    return this.dynamicForm.get('favorites') as FormArray;
-  }
-  
+  // get favorites() {
+  //   return this.dynamicForm.get('favorites') as FormArray;
+  // }
 
+  // this is same as above
+  favorites = this.dynamicForm.get('favorites') as FormArray;
+  
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.title.valueChanges.subscribe(val => console.log(val))
     this.myForm.valueChanges.subscribe(val => console.log(val));
     this.dynamicForm.valueChanges.subscribe(val => console.log(val))
+    // this.favorites.setControl(0, this.fb.control('mike'));
+    // this.favorites.clear();
   }
 
   onFormSubmit() {
     console.warn(this.myForm.value);
     console.warn(this.myForm.valid);
-    
     this.myForm.patchValue({
       title: 'new title',
       address: {
@@ -64,7 +66,6 @@ export class FormComponent implements OnInit {
   onForm2Submit() {
     console.warn(this.myFormBuilder.value);
     console.warn(this.myFormBuilder.valid);
-    
     this.myFormBuilder.patchValue({
       title: 'new title',
       address: {
@@ -91,12 +92,7 @@ export class FormComponent implements OnInit {
     if (this.favorites.length > 1) {
       this.favorites.removeAt(id);
     }
-
     /** its already managed on the view  by [disabled]*/
-   
   }
-
-
-
 
 }
