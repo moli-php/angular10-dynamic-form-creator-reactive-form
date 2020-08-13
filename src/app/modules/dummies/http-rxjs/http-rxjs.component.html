@@ -1,0 +1,77 @@
+<p>http-rxjs works! <a routerLink="/dummies">Back</a></p>
+
+<input type="text" id="1" (change)="onChange($event)" placeholder="search name and press enter" style="width:200px"/>
+<div class="sm-spinner" *ngIf="loading"></div>
+<!-- <pre *ngIf="!loading">
+    {{ contents | json}}
+</pre> -->
+
+<table>
+    
+    <colgroup>
+        <col width="5%" />
+        <col width="20%" />
+        <col width="20%" />
+        <col width="5%" />
+
+        <col width="5%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="5%" />
+        <col width="10%" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th colspan="4">Content</th>
+            <th colspan="6">Account</th>
+        </tr>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>title</th>
+            <th>country</th>
+
+            <th>id</th>
+            <th>name</th>
+            <th>supplier_id</th>
+            <th>list_size</th>
+            <th>country</th>
+            <th>industry</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let content of contents">
+            <td>{{content.account.id}}</td>
+            <td>{{content.name}}</td>
+            <td>{{content.title}}</td>
+            <td>{{content.country}}</td>
+
+            <td>{{content.account.id}}</td>
+            <td>{{content.account.name}}</td>
+            <td>{{content.account.supplier_id}}</td>
+            <td>{{content.account.list_size}}</td>
+            <td>{{content.account.country}}</td>
+            <td>{{content.account.industry}}</td>
+        </tr>
+    </tbody>
+
+</table>
+
+
+<!-- 
+{
+    "id": 98,
+    "account_id": 821,
+    "name": "Merry Christmas from the myPOS Team (Retail Systems Australia)",
+    "title": "Merry Christmas from the myPOS Team",
+    "country": "AU",
+    "account": {
+      "id": 821,
+      "name": "Retail Systems Australia",
+      "supplier_id": "1f894e6a10397862ab03f6a9c794f9f2",
+      "list_size": 793,
+      "country": "AU",
+      "industry": "IT"
+    }
+  }, -->

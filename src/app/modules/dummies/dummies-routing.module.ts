@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { SecretComponent } from './secret/secret.component';
 import { SearchDbComponent } from './search-db/search-db.component';
 import { FormComponent } from './form/form.component';
+import { HttpRxjsComponent } from './http-rxjs/http-rxjs.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AuthAdminGuard]},
   { path: 'secret', component: SecretComponent, canActivate: [AuthGuard]},
   { path: 'search-db', component: SearchDbComponent },
-  { path: 'form', component: FormComponent }
+  { path: 'form', component: FormComponent },
+  { path: 'http-rxjs', component: HttpRxjsComponent }
 ];
 
 @NgModule({

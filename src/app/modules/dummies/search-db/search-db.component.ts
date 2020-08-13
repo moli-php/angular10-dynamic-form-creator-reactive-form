@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
-import { switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Subject, of } from 'rxjs';
+import { switchMap, debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
 
@@ -34,8 +34,6 @@ export class SearchDbComponent implements OnInit, OnDestroy {
   contentData: any;
   loading: boolean = false;
 
-
-
   private contentLookup$: Subject<void> = new Subject();
 
   constructor(private formBuilder: FormBuilder, private apiService: ApiService) { }
@@ -59,6 +57,8 @@ export class SearchDbComponent implements OnInit, OnDestroy {
         return false;
       }
       this.contentLookup$.next();
+    },(err)=> {
+      this.loading = false;
     });
    
     this.contentLookup$.pipe(
@@ -71,6 +71,7 @@ export class SearchDbComponent implements OnInit, OnDestroy {
         this.loading = false;
     }, (err) =>{
       console.log(err)
+      this.loading = false;
     });
  
   }
@@ -80,12 +81,26 @@ export class SearchDbComponent implements OnInit, OnDestroy {
       switchMap(values => {
         this.loading = true;
         return this.apiService.searchContent(values)
+        // adding pipe just for a test to test name and title only
+        .pipe(
+          map(data => {
+              let contents = [];
+              for (let i in data) {
+                contents.push({name: data[i].name, title: data[i].title});
+              }
+              return contents;
+            })
+        )
       })
     ).subscribe(res =>{
       console.log(res)
       this.contentData = res;
       this.loading = false;
-    }, (err) => console.log(err))
+    }, (err) => {
+      console.log(err)
+      this.loading = false;
+    }
+    )
   }
 
 // too many conditions and it triggers any keys, even the `shift, alt, etc` key

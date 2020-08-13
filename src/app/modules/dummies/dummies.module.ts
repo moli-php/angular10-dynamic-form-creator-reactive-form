@@ -17,6 +17,7 @@ import { MyHighlightDirective } from './directive/my-highlight.directive';
 import { DummiesRoutingModule } from './dummies-routing.module';
 import { SearchDbComponent } from './search-db/search-db.component';
 import { FormComponent } from './form/form.component';
+import { HttpRxjsComponent } from './http-rxjs/http-rxjs.component';
 
 
 
@@ -28,7 +29,10 @@ import { FormComponent } from './form/form.component';
     SecretComponent, 
     AdminComponent, 
     DirectiveComponent, 
-    MyHighlightDirective, SearchDbComponent, FormComponent
+    MyHighlightDirective, 
+    SearchDbComponent, 
+    FormComponent, 
+    HttpRxjsComponent
   ],
   imports: [
     CommonModule,

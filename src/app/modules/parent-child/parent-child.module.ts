@@ -9,10 +9,11 @@ import { InteractParentComponent } from './interact/interact-parent/interact-par
 import { InteractChildComponent } from './interact/interact-child/interact-child.component';
 import { ListenChildComponent } from './listen/listen-child/listen-child.component';
 import { ListenParentComponent } from './listen/listen-parent/listen-parent.component';
+import { Child1Component } from './child1/child1.component';
 
 
 @NgModule({
-  declarations: [ParentChildComponent, ParentComponent, ChildComponent, InteractParentComponent, InteractChildComponent, ListenChildComponent, ListenParentComponent ],
+  declarations: [ParentChildComponent, ParentComponent, ChildComponent, InteractParentComponent, InteractChildComponent, ListenChildComponent, ListenParentComponent, Child1Component ],
   imports: [
     CommonModule,
     RouterModule

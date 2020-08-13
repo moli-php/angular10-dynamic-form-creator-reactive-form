@@ -1,9 +1,10 @@
-<p>binding works!</p>
+<h3>Basics of two-way binding</h3>
+<app-basic-binding></app-basic-binding>
+<hr>
+<h3>Direct component binding</h3>
+<button (click)="hello.toggle()">Toggle</button><br>
 
-<button (click)="hello.toggle()">Toggle</button>
-
-<h3>by component</h3>
-<!-- '#hello' is the sideBarComponent itself and passed it to 
+<!-- '#hello' is the sideBarComponent itself and passed it to
     sideBarToggleComponent with 'hello' as reference -->
 <app-side-bar-toggle [sideBarComponent]="hello"></app-side-bar-toggle>
 <app-side-bar #hello></app-side-bar>
@@ -19,7 +20,8 @@
 <h3>by service</h3>
 <app-side-bar-toggle3></app-side-bar-toggle3>
 <app-side-bar3></app-side-bar3>
-<br>
+<br><br><hr>
+
 <a routerLink="/dummies">Back</a>
 
 

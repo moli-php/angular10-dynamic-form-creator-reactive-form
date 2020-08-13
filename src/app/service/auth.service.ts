@@ -4,12 +4,14 @@ import { Observable } from 'rxjs';
 import { User } from '../interface/user';
 import { Router } from '@angular/router';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   endPoint: string = 'http://laravel5.4.local/api/';
   options: any;
+  isLoggedIn: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {
     this.options = {
@@ -18,6 +20,10 @@ export class AuthService {
         'charset': 'UTF-8'
       })
     };
+
+    if (localStorage.getItem('token')) {
+      this.isLoggedIn = true;
+    }
 
   }
 

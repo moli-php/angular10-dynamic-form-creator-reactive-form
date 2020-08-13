@@ -35,9 +35,9 @@ export class ApiService {
     return this.http.post(this.endPoint + 'dummy/search-content', JSON.stringify(reqData), this.options);
   }
 
-  // public login(reqData): Observable<any> {
-  //   return this.http.post(this.endPoint + 'dummy/login', JSON.stringify(reqData), this.options);
-  // }
+  public showAccount(id: number): Observable<object> {
+    return this.http.get(this.endPoint + `dummy/show-account/${id}`);
+  }
 
 
 

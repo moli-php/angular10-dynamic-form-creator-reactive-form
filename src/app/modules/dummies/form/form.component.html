@@ -46,13 +46,13 @@
     <label>Name: <input type="text" formControlName="name"></label><br>
     <div formArrayName="favorites">
         <h3>favorites</h3> 
-        <button (click)="addFavorite()">Add favorites</button>
+        <button (click)="addFavorite()" type="button">Add favorites</button>
         <div *ngFor="let favorite of favorites.controls; let i=index">
             <!-- The repeated alias template -->
             <label>
                 favorite {{i+1}}:
-              <input type="text" [formControlName]="i"><button [disabled]="favorites.length === 1" (click)="deleteFavorite(i)">X</button>
-            </label>
+              <input type="text" [formControlName]="i" (keypress)="favoriteOnChange($event)">
+            </label><button type="button" [disabled]="favorites.length === 1" (click)="deleteFavorite(i)">X</button>
         </div>
     </div>
 </form>

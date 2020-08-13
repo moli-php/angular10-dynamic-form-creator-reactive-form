@@ -6,10 +6,17 @@ import { DashboardComponent } from './modules/heroes/dashboard/dashboard.compone
 import { HeroesComponent } from './modules/heroes/heroes/heroes.component';
 import { HeroComponent } from './modules/heroes/hero/hero.component';
 import { BindingComponent } from './modules/binding/binding.component';
+import { Child1Component } from './modules/parent-child/child1/child1.component';
 
 const ROUTES: Routes = [
     { path: '', component: DefaultComponent, pathMatch: 'full' },
-    { path: 'parent-child', component: ParentChildComponent },
+    // { path: 'parent-child', component: ParentChildComponent },
+    { path: 'parent-child', 
+      component: ParentChildComponent,
+      children: [
+          { path: 'child1', component: Child1Component } // path is working but not showing any
+      ]
+    },
     { path: 'heroes-dashboard', component: DashboardComponent },
     { path: 'heroes', component: HeroesComponent },
     { path: 'heroes/:id', component: HeroComponent },

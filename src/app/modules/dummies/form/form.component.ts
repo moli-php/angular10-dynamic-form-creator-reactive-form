@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray  } from '@angular/forms';
 
 @Component({
@@ -42,12 +42,15 @@ export class FormComponent implements OnInit {
   // this is same as above
   favorites = this.dynamicForm.get('favorites') as FormArray;
   
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private el: ElementRef) { }
 
   ngOnInit(): void {
     this.title.valueChanges.subscribe(val => console.log(val))
     this.myForm.valueChanges.subscribe(val => console.log(val));
     this.dynamicForm.valueChanges.subscribe(val => console.log(val))
+    // this.favorites.valueChanges.subscribe((val) => {
+    //   console.log(val)
+    // });
     // this.favorites.setControl(0, this.fb.control('mike'));
     // this.favorites.clear();
   }
@@ -82,8 +85,14 @@ export class FormComponent implements OnInit {
           hasEmptyValues = true;
         }
     });
+    // insert new element and set foucs
     if (hasEmptyValues === false) {
-      this.favorites.push(this.fb.control(''));
+       this.favorites.push(this.fb.control(''));
+       const latest_index = this.favorites.length - 1;
+       window.setTimeout(() => {
+         const favoriteElements = this.el.nativeElement.querySelectorAll('[formArrayName="favorites"] input');
+         favoriteElements[latest_index].focus();
+       },100)
     }
   }
 
@@ -93,6 +102,14 @@ export class FormComponent implements OnInit {
       this.favorites.removeAt(id);
     }
     /** its already managed on the view  by [disabled]*/
+  }
+
+  favoriteOnChange(e) {
+    // on enter key, trigger addFavorite
+    if (e.keyCode === 13) {
+      this.addFavorite();
+    }
+    console.log(e.keyCode);
   }
 
 }

@@ -27,6 +27,14 @@
     width: 50%;
     height: 50px;
 }
+
+.xs-spinner {
+    background-image: url("images/spin.gif");
+    background-repeat: no-repeat;
+    background-size: 30px;
+    height: 30px;
+}
+
 .breadcrumb-padding{
     padding: 8px 15px;
 }

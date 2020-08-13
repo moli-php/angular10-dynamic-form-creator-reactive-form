@@ -23,10 +23,13 @@ export class LoginComponent implements OnInit {
     .subscribe((res) => {
       localStorage.setItem('token', btoa(res.username))
       localStorage.setItem('user', JSON.stringify(res));
+      console.log(this.authService.isLoggedIn);
       this.router.navigate(['/dummies/secret']);
     }, (error) => {
       console.error(error);
       alert('login failed')
+    },() => {
+      console.log(this.authService.isLoggedIn);
     })
   }
   // async submitForm() {
