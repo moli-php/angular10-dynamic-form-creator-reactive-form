@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
 import { HeroesService } from '../../service/heroes.service';
+import { DummyService } from '../../service/dummy.service';
 
 import { RouterModule } from '@angular/router';
 
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ],
   providers: [
-    HeroesService
+    HeroesService,
+    DummyService
   ]
 })
 export class HeroesModule { }

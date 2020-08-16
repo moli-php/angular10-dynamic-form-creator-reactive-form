@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, of } from 'rxjs';
-import { switchMap, debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { switchMap, debounceTime, debounce, distinctUntilChanged, map, concatAll } from 'rxjs/operators';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
 
@@ -62,6 +62,7 @@ export class SearchDbComponent implements OnInit, OnDestroy {
     });
    
     this.contentLookup$.pipe(
+      // debounceTime(200),
       switchMap(() => {
       this.loading = true;
       return this.apiService.searchContent(this.contentForm.value);
@@ -75,21 +76,35 @@ export class SearchDbComponent implements OnInit, OnDestroy {
     });
  
   }
-  // can't handle empty values
+
   otherWayThatWork() {
+    let handleData = [];
     this.contentForm2.valueChanges.pipe(
       switchMap(values => {
         this.loading = true;
+        if(!values.name && !values.title) {
+          this.loading = false;
+          this.contentData = [];
+          return this.contentData;
+        }
         return this.apiService.searchContent(values)
         // adding pipe just for a test to test name and title only
         .pipe(
+          /**#1 */
+          // map(data => {
+          //     let contents = [];
+          //     for (let i in data) {
+          //       contents.push({name: data[i].name, title: data[i].title});
+          //     }
+          //     return contents;
+          //   })
+          /**#2 */
+          concatAll(),
+          map(({name, title}: any) => ({name:name, title:title})),
           map(data => {
-              let contents = [];
-              for (let i in data) {
-                contents.push({name: data[i].name, title: data[i].title});
-              }
-              return contents;
-            })
+            handleData.push(data);
+            return handleData;
+          })
         )
       })
     ).subscribe(res =>{

@@ -1,18 +1,29 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Self, SkipSelf } from '@angular/core';
+import { DummyService } from '../../service/dummy.service';
+import { BrowserStorageService, BROWSER_STORAGE } from 'src/app/service/browser-storage.service';
 
 @Component({
   selector: 'app-dummies',
   templateUrl: './dummies.component.html',
-  styleUrls: ['./dummies.component.css']
+  styleUrls: ['./dummies.component.css'],
+  providers: [
+    BrowserStorageService,
+    { provide: BROWSER_STORAGE, useFactory: () => sessionStorage }
+  ]
 })
 export class DummiesComponent implements OnInit, OnDestroy {
   timer: any;
 
 
-  constructor() { }
+  constructor(
+  @Self() private sessionStorageService: BrowserStorageService,
+  @SkipSelf() private localStorageService: BrowserStorageService
+  ) { }
 
   ngOnInit(): void {
     // this.loopLimit(-1);
+    this.sessionStorageService.set('session', 'session starage')
+    this.localStorageService.set('local', 'local storage')
   }
 
   ngOnDestroy(): void  {

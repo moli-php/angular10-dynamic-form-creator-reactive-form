@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, of, fromEvent, Observable, forkJoin } from 'rxjs';
 import {catchError, last, mergeAll, take, switchMap, debounceTime, 
   distinctUntilChanged, map, throttleTime, scan, filter, concatAll, 
-  concatMap, flatMap, distinct, concat, takeUntil, toArray, exhaust, delay, debounce  } from 'rxjs/operators';
+  concatMap, flatMap, distinct, concat, takeUntil, toArray, exhaust, 
+  delay, debounce, combineAll, combineLatest  } from 'rxjs/operators';
 import { ApiService } from 'src/app/service/api.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class HttpRxjsComponent implements OnInit, OnDestroy {
   contents: any;
   loading: boolean = false;
   contentService: any;
+  dummyData: any;
 
  
 
@@ -50,16 +52,44 @@ export class HttpRxjsComponent implements OnInit, OnDestroy {
 // const result = clicks.pipe(debounceTime(1000));
 // result.subscribe(x => console.log(x));
 
-const a = of(1, 2, 3, 4, 5).pipe(
-  map(n => {
-     if (n === 4) {
-       throw 'four!';
-    }
-   return n;
-  }),
-  catchError(err => err),
-);
-a.subscribe(data => console.log(data))
+// const a = of(1, 2, 3, 4, 5).pipe(
+//   map(n => {
+//      if (n === 4) {
+//        throw 'four!';
+//     }
+//    return n;
+//   }),
+//   catchError(err => err),
+// );
+// a.subscribe(data => console.log(data))
+
+const a = of([{a:'foo', b:'bar'}, {a:'baz', b:'foo'}]);
+const b = of([{a:'baz', b:'foo'}, {a:'foo', b:'bar'}]);
+const c = [{a:'joe'}];
+const d = [{a:'joe', b: 'john', c:'miles'}];
+const e = [{a:'jack'}];
+
+
+    a.pipe(
+      map(x => x),
+      combineAll()
+    ).subscribe(x => {
+      this.dummyData = x;
+      console.log(x)
+    },
+    (err)=> {
+      console.log
+    },
+    () => {
+      console.log(this.dummyData);
+      console.log('complete')
+    })
+
+    a.subscribe(console.log)
+
+    
+
+
 
 
   }
@@ -115,7 +145,6 @@ a.subscribe(data => console.log(data))
       // }),
 
       map(({id, account_id, name, title, country}) => ({id:id, account_id:account_id, name:name, title:title, country:country, account: null})),
-      distinctUntilChanged(),
       map((data) => {
         this.apiService.showAccount(data.account_id)
         .pipe(

@@ -10,6 +10,7 @@
     
     <colgroup>
         <col width="5%" />
+        <col width="5%" />
         <col width="20%" />
         <col width="20%" />
         <col width="5%" />
@@ -19,7 +20,7 @@
         <col width="10%" />
         <col width="10%" />
         <col width="5%" />
-        <col width="10%" />
+        <col width="5%" />
     </colgroup>
     <thead>
         <tr>
@@ -27,6 +28,7 @@
             <th colspan="6">Account</th>
         </tr>
         <tr>
+            <th>#</th>
             <th>id</th>
             <th>name</th>
             <th>title</th>
@@ -41,7 +43,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let content of contents">
+        <tr *ngFor="let content of contents; let idx = index;">
+            <td>{{idx + 1}}</td>
             <td>{{content.account.id}}</td>
             <td>{{content.name}}</td>
             <td>{{content.title}}</td>

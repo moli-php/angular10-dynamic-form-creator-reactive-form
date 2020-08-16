@@ -6,7 +6,9 @@ import { Observable, of } from 'rxjs';
 })
 export class DummyService {
 
-  constructor() { }
+  constructor() {
+    console.log('dummy service')
+   }
 
   public getUser() {
     const user = cb => {

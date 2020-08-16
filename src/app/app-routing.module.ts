@@ -11,7 +11,7 @@ import { Child1Component } from './modules/parent-child/child1/child1.component'
 const ROUTES: Routes = [
     { path: '', component: DefaultComponent, pathMatch: 'full' },
     // { path: 'parent-child', component: ParentChildComponent },
-    { path: 'parent-child', 
+    { path: 'parent-child',
       component: ParentChildComponent,
       children: [
           { path: 'child1', component: Child1Component } // path is working but not showing any
@@ -26,9 +26,9 @@ const ROUTES: Routes = [
     { path: '**', redirectTo: ''}
 ];
 
-//configures NgModule imports and exports
+// configures NgModule imports and exports
 @NgModule({
-    imports: [RouterModule.forRoot(ROUTES,{enableTracing: false})],
+    imports: [RouterModule.forRoot(ROUTES, {enableTracing: false})],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

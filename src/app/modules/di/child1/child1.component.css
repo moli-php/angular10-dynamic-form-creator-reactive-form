@@ -1,0 +1,6 @@
+.child {
+    background-color: violet;
+    width: 200px;
+    position: absolute;
+    bottom: 0;
+}

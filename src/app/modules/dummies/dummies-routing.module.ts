@@ -11,6 +11,7 @@ import { SecretComponent } from './secret/secret.component';
 import { SearchDbComponent } from './search-db/search-db.component';
 import { FormComponent } from './form/form.component';
 import { HttpRxjsComponent } from './http-rxjs/http-rxjs.component';
+import { DiComponent } from '../../modules/di/di.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'secret', component: SecretComponent, canActivate: [AuthGuard]},
   { path: 'search-db', component: SearchDbComponent },
   { path: 'form', component: FormComponent },
-  { path: 'http-rxjs', component: HttpRxjsComponent }
+  { path: 'http-rxjs', component: HttpRxjsComponent },
+  { path: 'di', component: DiComponent }
 ];
 
 @NgModule({
