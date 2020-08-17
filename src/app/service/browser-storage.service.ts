@@ -15,10 +15,14 @@ export class BrowserStorageService {
   }
 
   get(key: string) {
-    this.storage.getItem(key);
+    return this.storage.getItem(key);
   }
 
   set(key: string, value: string) {
     this.storage.setItem(key, value);
+  }
+
+  removeItem(key: string) {
+    this.storage.removeItem(key);
   }
 }

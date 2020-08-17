@@ -24,10 +24,17 @@ export class DummiesComponent implements OnInit, OnDestroy {
     // this.loopLimit(-1);
     this.sessionStorageService.set('session', 'session starage')
     this.localStorageService.set('local', 'local storage')
+    console.log(this.sessionStorageService.get('session'))
   }
 
   ngOnDestroy(): void  {
     // clearInterval(this.timer);
+    if (this.sessionStorageService.get('session')) {
+      this.sessionStorageService.removeItem('session');
+    }
+    if (this.localStorageService.get('local')) {
+      this.localStorageService.removeItem('local');
+    }
   }
 
   loopLimit(numberStart: number) {
