@@ -3,7 +3,7 @@ import { Subject, of, fromEvent, Observable, forkJoin } from 'rxjs';
 import {catchError, last, mergeAll, take, switchMap, debounceTime, 
   distinctUntilChanged, map, throttleTime, scan, filter, concatAll, 
   concatMap, flatMap, distinct, concat, takeUntil, toArray, exhaust, 
-  delay, debounce, combineAll, combineLatest  } from 'rxjs/operators';
+  delay, debounce, combineAll, combineLatest, mergeMap  } from 'rxjs/operators';
 import { ApiService } from 'src/app/service/api.service';
 
 @Component({
@@ -63,7 +63,7 @@ export class HttpRxjsComponent implements OnInit, OnDestroy {
 // );
 // a.subscribe(data => console.log(data))
 
-const a = of([{a:'foo', b:'bar'}, {a:'baz', b:'foo'}]);
+const a = of([{a:'foo', b:'bar'}, {a:'baz', b:'foo', e:'eco'}]);
 const b = of([{a:'baz', b:'foo'}, {a:'foo', b:'bar'}]);
 const c = [{a:'joe'}];
 const d = [{a:'joe', b: 'john', c:'miles'}];
@@ -71,7 +71,7 @@ const e = [{a:'jack'}];
 
 
     a.pipe(
-      map(x => x),
+      // map(x => x),
       combineAll()
     ).subscribe(x => {
       this.dummyData = x;
@@ -81,15 +81,14 @@ const e = [{a:'jack'}];
       console.log
     },
     () => {
-      console.log(this.dummyData);
       console.log('complete')
+      console.log(this.dummyData);
+     
     })
 
     a.subscribe(console.log)
 
-    
-
-
+    this.fortJoinTest();
 
 
   }
@@ -176,9 +175,52 @@ const e = [{a:'jack'}];
       }
     })
 
+  }
+
+  fortJoinTest() {
+    console.log('fortJoin Initialized')
+    const payload = {name: 'test'};
+    
+    forkJoin({
+      contents: this.apiService.searchContent(payload),
+      account: this.apiService.showAccount(2296)
+      }
+    ).subscribe(data => console.log(data))
+
+    forkJoin(
+      this.apiService.searchContent(payload),
+      this.apiService.showAccount(2296)
+    ).subscribe(data => console.log(data))
+
+    const myPromise = val => 
+    new Promise(resolve => setTimeout(() => resolve(`Promise Resolved: ${val}`), 5000));
+    // console.log(myPromise);
+
+    const sample = forkJoin(
+      of('hello'),
+      of('world'),
+      myPromise('here')
+    )
+    sample.subscribe(data => console.log(data));
+
+    const sample2 = forkJoin(
+      of('hello'),
+      of('world'),
+      myPromise('here')
+    ).pipe(
+      map(([a,b,promise]) => ({promise,a,b}))
+    )
+    sample2.subscribe(data => console.log(data));
+
+    const sample3 = combineLatest(
+      of('hello'),
+      of('world'),
+      myPromise('here')
+    );
+    
 
 
-
+  
 
   }
 

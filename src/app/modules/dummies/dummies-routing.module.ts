@@ -12,6 +12,9 @@ import { SearchDbComponent } from './search-db/search-db.component';
 import { FormComponent } from './form/form.component';
 import { HttpRxjsComponent } from './http-rxjs/http-rxjs.component';
 import { DiComponent } from '../../modules/di/di.component';
+import { Di2Component } from '../../modules/di/di2.component';
+import { RouteResolverComponent } from './route-resolver/route-resolver.component';
+import { ApiResolverService } from './route-resolver/api-resolver.service';
 
 
 const routes: Routes = [
@@ -24,7 +27,9 @@ const routes: Routes = [
   { path: 'search-db', component: SearchDbComponent },
   { path: 'form', component: FormComponent },
   { path: 'http-rxjs', component: HttpRxjsComponent },
-  { path: 'di', component: DiComponent }
+  { path: 'di', component: DiComponent },
+  { path: 'di2', component: Di2Component },
+  { path: 'route-resolver', component: RouteResolverComponent, resolve: { data: ApiResolverService} },
 ];
 
 @NgModule({

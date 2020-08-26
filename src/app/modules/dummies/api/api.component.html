@@ -1,4 +1,4 @@
-<p>api works!</p>
+<p>api works! <a routerLink="/dummies">back</a></p>
 
 <div>Observable</div>
 <div [ngClass]="{'xs-spinner': observableLoading}"></div>
@@ -11,8 +11,7 @@
 <div>Promise</div>
 <div [ngClass]="{'xs-spinner': promiseLoading}"></div>
 <div *ngIf="!promiseLoading">promise data : {{promiseData | json}}</div>
-
-<p *ngIf="!awaitLoading">
-    <button routerLink="/dummies">Back</button>
-</p>
-
+<hr>
+<div>Delay from server</div>
+<div [ngClass]="{'xs-spinner': delayLoading}"></div>
+<div *ngIf="!delayLoading">Delay data : {{delayData | json}}</div>

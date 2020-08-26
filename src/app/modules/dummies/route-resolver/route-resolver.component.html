@@ -1,0 +1,9 @@
+<p>route-resolver works! <a routerLink="/dummies/">back</a></p>
+<p>data will available first before the templete will render</p>
+
+<ul>
+    <li *ngFor="let content of contents">
+        <strong>{{content.id}} </strong> 
+        <span> {{content.title}}</span>
+    </li>
+</ul>

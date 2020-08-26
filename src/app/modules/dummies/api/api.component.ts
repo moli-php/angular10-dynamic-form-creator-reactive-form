@@ -12,9 +12,11 @@ export class ApiComponent implements OnInit {
   awaitData: any;
   observableData: any;
   promiseData: any;
+  delayData: any;
   observableLoading: boolean = true;
   awaitLoading: boolean = true;
   promiseLoading: boolean = true;
+  delayLoading: boolean = true;
 
   constructor(private apiService: ApiService, private dummyService: DummyService ) { }
 
@@ -78,16 +80,23 @@ export class ApiComponent implements OnInit {
     })
   }
 
+  // this.splat(1,'this', 'is', 'a', 'splat');
   private splat(req, ...params) {
     console.log(req, params)
   }
 
   private withDelay() {
-    this.apiService.getDelaySample().subscribe(sample => console.log('delay', sample));
+    this.apiService.getDelaySample().subscribe(sample => {
+      this.delayData = sample;
+      console.log('delay', sample);
+      this.delayLoading = false;
+    }, (err) => {
+     this.delayLoading = false;
+     console.log(err)
+    }
+    
+    );
   }
-
-
-
 
 
 }

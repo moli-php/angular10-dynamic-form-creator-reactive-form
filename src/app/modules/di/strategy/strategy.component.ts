@@ -1,6 +1,5 @@
 import { Component, OnInit, Injectable, Optional, InjectionToken } from '@angular/core';
 
-
 export abstract class IStrategy {
   abstract calculate(a, b): number;
 }

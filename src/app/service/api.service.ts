@@ -39,6 +39,12 @@ export class ApiService {
     return this.http.get(this.endPoint + `dummy/show-account/${id}`);
   }
 
+  public someError(reqData): any {
+    return this.http.post(this.endPoint + `dummy/some-error`, JSON.stringify(reqData), this.options);
+  }
+
+
+
 
 
 }

@@ -19,6 +19,7 @@ import { SearchDbComponent } from './search-db/search-db.component';
 import { FormComponent } from './form/form.component';
 import { HttpRxjsComponent } from './http-rxjs/http-rxjs.component';
 import { BrowserStorageService, BROWSER_STORAGE } from 'src/app/service/browser-storage.service';
+import { RouteResolverComponent } from './route-resolver/route-resolver.component';
 
 
 
@@ -34,7 +35,7 @@ import { BrowserStorageService, BROWSER_STORAGE } from 'src/app/service/browser-
     MyHighlightDirective, 
     SearchDbComponent, 
     FormComponent, 
-    HttpRxjsComponent
+    HttpRxjsComponent, RouteResolverComponent
   ],
   imports: [
     CommonModule,

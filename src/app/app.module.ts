@@ -24,9 +24,9 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule,
     ParentChildModule,
     HeroesModule,
+    DiModule,
     DummiesModule,
     BindingModule,
-    DiModule
   ],
   providers: [
     //{provide: LocationStrategy, useClass: HashLocationStrategy}
