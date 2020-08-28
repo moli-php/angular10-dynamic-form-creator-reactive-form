@@ -18,7 +18,7 @@ import { ApiResolverService } from './route-resolver/api-resolver.service';
 
 
 const routes: Routes = [
-  { path: '', component: DummiesComponent },
+  { path: '', component: DummiesComponent, data: { title: 'dummies'} },
   { path: 'api', component: ApiComponent},
   { path: 'directive', component: DirectiveComponent},
   { path: 'login', component: LoginComponent},
@@ -26,10 +26,10 @@ const routes: Routes = [
   { path: 'secret', component: SecretComponent, canActivate: [AuthGuard]},
   { path: 'search-db', component: SearchDbComponent },
   { path: 'form', component: FormComponent },
-  { path: 'http-rxjs', component: HttpRxjsComponent },
-  { path: 'di', component: DiComponent },
-  { path: 'di2', component: Di2Component },
-  { path: 'route-resolver', component: RouteResolverComponent, resolve: { data: ApiResolverService} },
+  { path: 'http-rxjs', component: HttpRxjsComponent, data: {title: 'rxjs'} },
+  { path: 'di', component: DiComponent, data: {title: 'DI'} },
+  { path: 'di2', component: Di2Component, data: {title: 'DI2'} },
+  { path: 'route-resolver', component: RouteResolverComponent, resolve: { data: ApiResolverService}, data: {title: 'route resolver'} },
 ];
 
 @NgModule({

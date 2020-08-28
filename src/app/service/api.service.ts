@@ -39,11 +39,13 @@ export class ApiService {
     return this.http.get(this.endPoint + `dummy/show-account/${id}`);
   }
 
+  public showSponsor(id: number): Observable<object> {
+    return this.http.get(this.endPoint + `dummy/show-sponsor/${id}`);
+  }
+
   public someError(reqData): any {
     return this.http.post(this.endPoint + `dummy/some-error`, JSON.stringify(reqData), this.options);
   }
-
-
 
 
 

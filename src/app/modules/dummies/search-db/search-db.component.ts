@@ -62,7 +62,7 @@ export class SearchDbComponent implements OnInit, OnDestroy {
     });
    
     this.contentLookup$.pipe(
-      // debounceTime(200),
+      debounceTime(200),
       switchMap(() => {
       this.loading = true;
       return this.apiService.searchContent(this.contentForm.value);

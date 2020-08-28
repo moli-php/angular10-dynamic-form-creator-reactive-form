@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subject, of, fromEvent, Observable, forkJoin } from 'rxjs';
+import { Subject, of, fromEvent, Observable, forkJoin, from } from 'rxjs';
 import {catchError, last, mergeAll, take, switchMap, debounceTime, 
   distinctUntilChanged, map, throttleTime, scan, filter, concatAll, 
   concatMap, flatMap, distinct, concat, takeUntil, toArray, exhaust, 
   delay, debounce, combineAll, combineLatest, mergeMap  } from 'rxjs/operators';
 import { ApiService } from 'src/app/service/api.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-http-rxjs',
@@ -17,7 +18,6 @@ export class HttpRxjsComponent implements OnInit, OnDestroy {
   contentService: any;
   dummyData: any;
 
- 
 
   constructor(private apiService: ApiService) { }
 
@@ -83,12 +83,13 @@ const e = [{a:'jack'}];
     () => {
       console.log('complete')
       console.log(this.dummyData);
-     
     })
 
     a.subscribe(console.log)
 
-    this.fortJoinTest();
+    // this.fortJoinTest();
+
+    this.MapVsFlatMap();
 
 
   }
@@ -123,7 +124,7 @@ const e = [{a:'jack'}];
       concatAll(),
       distinct((b: any) => b.country && b.account_id),
       filter((data: any) => data.account_id !== 0),
-      distinctUntilChanged(),
+      // distinctUntilChanged(),
       // map(({id, account_id, name, title,country}) => {
       //   let content = {id:id, name:name, title:title, country:country, account: null};
       //     this.apiService.showAccount(account_id).pipe(
@@ -217,10 +218,72 @@ const e = [{a:'jack'}];
       of('world'),
       myPromise('here')
     );
+
+  }
+
+  MapVsFlatMap()
+  {
+    console.log('MapVsFlatMap')
+    const payload = { title: 'test'};
+    let contentData: any;
+
+    // flatMap
+    this.apiService.searchContent(payload).pipe(
+      flatMap((contents: any) => {
+          const dataHandler = [];
+          return contents.map(item => {
+            console.log('flatmap in progress')
+            const itemData = {id:item.id, title:item.title, account:null, sponsor:null};
+            if (item.account_id) {
+              this.apiService.showAccount(item.account_id).subscribe(account => {itemData.account = account});
+            }
+            if (item.sponsor_id) {
+              this.apiService.showSponsor(item.sponsor_id).subscribe(sponsor => itemData.sponsor = sponsor)
+            }
+            dataHandler.push(itemData);
+            return dataHandler;
+          })
+      })
+    )
+    .subscribe(data => {
+        console.log(data);
+        contentData = data
+      }, 
+      (err) => {},
+      () => {
+         console.log('flatmap complete');
+         console.log(contentData)
+      })
     
+    // Map (more better)
+    this.apiService.searchContent(payload).pipe(
+        map((contents: any) => {
+            return contents.map(item => {
+              console.log('map in progress')
+              const itemData = {id:item.id, title:item.title, account:null, sponsor:null};
+              if (item.account_id) {
+                this.apiService.showAccount(item.account_id).pipe(map(({id,name}:any) => ({id:id,name:name}))).subscribe(account => {itemData.account = account});
+                // this.apiService.showAccount(item.account_id).subscribe(account => {itemData.account = account});
+              }
+              if (item.sponsor_id) {
+                this.apiService.showSponsor(item.sponsor_id).subscribe(sponsor => itemData.sponsor = sponsor)
+              }
+             return itemData;
+            })
+        })
+    )
+    .subscribe({
+      next: (data) => {
+        console.log(data);
+      },
+      error: (err) => {
 
-
-  
+      },
+      complete: () => {
+        console.log('map complete');
+        console.log(contentData)
+      }
+    })
 
   }
 

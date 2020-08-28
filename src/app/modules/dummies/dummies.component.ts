@@ -1,6 +1,10 @@
 import { Component, OnInit, OnDestroy, Self, SkipSelf } from '@angular/core';
 import { DummyService } from '../../service/dummy.service';
 import { BrowserStorageService, BROWSER_STORAGE } from 'src/app/service/browser-storage.service';
+import { Title } from '@angular/platform-browser';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
+import { Child1Component } from '../parent-child/child1/child1.component';
 
 @Component({
   selector: 'app-dummies',
@@ -17,7 +21,9 @@ export class DummiesComponent implements OnInit, OnDestroy {
 
   constructor(
   @Self() private sessionStorageService: BrowserStorageService,
-  @SkipSelf() private localStorageService: BrowserStorageService
+  @SkipSelf() private localStorageService: BrowserStorageService,
+  private titleService: Title, private router: Router,
+  private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +32,27 @@ export class DummiesComponent implements OnInit, OnDestroy {
     this.localStorageService.set('local', 'local storage')
     console.log(this.sessionStorageService.get('session'))
     console.log(this.localStorageService.get('local'))
+
+    // dynamic page title
+    const title = this.titleService.getTitle();
+    console.log(title);
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(() => {
+        const child = this.activatedRoute.firstChild;
+        let a = this.activatedRoute.children;
+        console.log(a)
+        // console.log(child)
+        // console.log(child.snapshot.data['title'])
+        // if (child.snapshot.data['title']) {
+        //   return child.snapshot.data['title'];
+        // }
+        return title;
+      })
+    ).subscribe((ttl: string) => {
+        this.titleService.setTitle(ttl)
+    });
+
   }
 
   ngOnDestroy(): void  {

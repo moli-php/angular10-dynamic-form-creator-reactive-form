@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-directive',
@@ -9,9 +10,10 @@ export class DirectiveComponent implements OnInit {
 
   color: string;
 
-  constructor() { }
+  constructor(private titleService: Title) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Directive')
   }
 
 }

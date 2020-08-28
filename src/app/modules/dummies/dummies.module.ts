@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { SecretComponent } from './secret/secret.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 import { AuthService } from '../../service/auth.service';
 import { AuthGuard } from '../../service/auth.guard';
@@ -46,13 +47,15 @@ import { RouteResolverComponent } from './route-resolver/route-resolver.componen
     ReactiveFormsModule
   ],
   providers: [
+    Title,
     AuthService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true
-    }
+    },
+
 
   ]
 })

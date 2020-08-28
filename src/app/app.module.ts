@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 // import { HttpClientModule } from '@angular/common/http';
 // import {HashLocationStrategy, LocationStrategy} from '@angular/common';
@@ -29,6 +29,7 @@ import { AppRoutingModule } from './app-routing.module';
     BindingModule,
   ],
   providers: [
+    Title
     //{provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
