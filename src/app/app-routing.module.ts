@@ -21,7 +21,8 @@ const ROUTES: Routes = [
     { path: 'heroes', component: HeroesComponent },
     { path: 'heroes/:id', component: HeroComponent },
     { path: 'lazy-load', loadChildren: () => import('./modules/lazy-load/lazy-load.module').then(m => m.LazyLoadModule) },
-    { path: 'dummies', loadChildren: () => import('./modules/dummies/dummies.module').then(m => m.DummiesModule) },
+    // { path: 'dummies', loadChildren: () => import('./modules/dummies/dummies.module').then(m => m.DummiesModule) },
+    { path: 'dummies', loadChildren: './modules/dummies/dummies.module#DummiesModule' },
     { path: 'binding', component: BindingComponent },
     { path: '**', redirectTo: ''}
 ];

@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: '', component: DummiesComponent, data: { title: 'dummies'} },
   { path: 'api', component: ApiComponent},
   { path: 'directive', component: DirectiveComponent},
-  { path: 'login', component: LoginComponent},
+  { path: 'login', component: LoginComponent, data: {title: 'login'}},
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AuthAdminGuard]},
   { path: 'secret', component: SecretComponent, canActivate: [AuthGuard]},
   { path: 'search-db', component: SearchDbComponent },
