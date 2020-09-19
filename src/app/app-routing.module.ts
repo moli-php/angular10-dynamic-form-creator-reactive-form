@@ -24,6 +24,7 @@ const ROUTES: Routes = [
     // { path: 'dummies', loadChildren: () => import('./modules/dummies/dummies.module').then(m => m.DummiesModule) },
     { path: 'dummies', loadChildren: './modules/dummies/dummies.module#DummiesModule' },
     { path: 'binding', component: BindingComponent },
+    { path: 'plug-ins', loadChildren: () => import('./modules/plug-ins/plug-ins.module').then(m => m.PlugInsModule) },
     { path: '**', redirectTo: ''}
 ];
 

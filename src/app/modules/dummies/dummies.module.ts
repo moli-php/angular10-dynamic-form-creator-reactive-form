@@ -21,6 +21,7 @@ import { FormComponent } from './form/form.component';
 import { HttpRxjsComponent } from './http-rxjs/http-rxjs.component';
 import { BrowserStorageService, BROWSER_STORAGE } from 'src/app/service/browser-storage.service';
 import { RouteResolverComponent } from './route-resolver/route-resolver.component';
+import { ChildrenDecoratorsComponent, JokeComponent, JokeListComponent } from './children-decorators/children-decorators.component';
 
 
 
@@ -36,7 +37,8 @@ import { RouteResolverComponent } from './route-resolver/route-resolver.componen
     MyHighlightDirective, 
     SearchDbComponent, 
     FormComponent, 
-    HttpRxjsComponent, RouteResolverComponent
+    HttpRxjsComponent, RouteResolverComponent, 
+    ChildrenDecoratorsComponent, JokeComponent, JokeListComponent
   ],
   imports: [
     CommonModule,

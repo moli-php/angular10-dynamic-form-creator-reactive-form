@@ -1,0 +1,8 @@
+<p>children-decorators works! <a routerLink="/dummies">back</a></p>
+
+<app-joke-list>
+    <app-joke [joke]="joke">
+        <span class="setup">{{joke.setup}}</span>
+        <h1 class="punchline">{{joke.punchline}}</h1>
+    </app-joke>
+</app-joke-list>
