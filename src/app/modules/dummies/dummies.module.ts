@@ -22,6 +22,7 @@ import { HttpRxjsComponent } from './http-rxjs/http-rxjs.component';
 import { BrowserStorageService, BROWSER_STORAGE } from 'src/app/service/browser-storage.service';
 import { RouteResolverComponent } from './route-resolver/route-resolver.component';
 import { ChildrenDecoratorsComponent, JokeComponent, JokeListComponent } from './children-decorators/children-decorators.component';
+import { NgTemplateComponent } from './ng-template/ng-template.component';
 
 
 
@@ -38,7 +39,7 @@ import { ChildrenDecoratorsComponent, JokeComponent, JokeListComponent } from '.
     SearchDbComponent, 
     FormComponent, 
     HttpRxjsComponent, RouteResolverComponent, 
-    ChildrenDecoratorsComponent, JokeComponent, JokeListComponent
+    ChildrenDecoratorsComponent, JokeComponent, JokeListComponent, NgTemplateComponent
   ],
   imports: [
     CommonModule,

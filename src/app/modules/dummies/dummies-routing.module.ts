@@ -16,6 +16,8 @@ import { Di2Component } from '../../modules/di/di2.component';
 import { RouteResolverComponent } from './route-resolver/route-resolver.component';
 import { ApiResolverService } from './route-resolver/api-resolver.service';
 import { ChildrenDecoratorsComponent } from './children-decorators/children-decorators.component';
+import { NgTemplateComponent } from './ng-template/ng-template.component';
+
 
 
 const routes: Routes = [
@@ -30,8 +32,9 @@ const routes: Routes = [
   { path: 'http-rxjs', component: HttpRxjsComponent, data: {title: 'rxjs'} },
   { path: 'di', component: DiComponent, data: {title: 'DI'} },
   { path: 'di2', component: Di2Component, data: {title: 'DI2'} },
-  { path: 'route-resolver', component: RouteResolverComponent, resolve: { data: ApiResolverService}, data: {title: 'route resolver'} },
-  { path: 'children-decorators', component: ChildrenDecoratorsComponent }
+  { path: 'route-resolver', component: RouteResolverComponent, resolve: { data: ApiResolverService }, data: {title: 'route resolver'} },
+  { path: 'children-decorators', component: ChildrenDecoratorsComponent },
+  { path: 'ng-template', component: NgTemplateComponent },
 ];
 
 @NgModule({

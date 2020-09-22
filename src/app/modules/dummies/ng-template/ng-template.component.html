@@ -1,0 +1,33 @@
+<p>ng-template and ng-container: <a routerLink="/dummies">Back</a></p>
+
+<h4>ng-template</h4>
+<ng-template [ngIf]="isShow">
+    <p>this will show</p>
+</ng-template>
+
+<ng-template [ngIf]="!isShow">
+    <p>this will hide</p>
+</ng-template>
+<hr>
+
+<h4>ng-container</h4>
+<ul>
+
+    <li><h4>boys:</h4></li>
+    <ng-container *ngFor="let item of someData">
+        <li *ngIf="item.gender === 'm'">{{item.name}}</li>
+    </ng-container>
+
+    <li><h4>girls:</h4></li>
+    <ng-container *ngFor="let item of someData">
+        <li *ngIf="item.gender !== 'm'">{{item.name}}</li>
+    </ng-container>
+
+</ul>
+
+<input type="checkbox" [(ngModel)]="isChecked">
+<span *ngIf="isChecked; else showHidden">on</span>
+
+<ng-template #showHidden>
+off
+</ng-template>

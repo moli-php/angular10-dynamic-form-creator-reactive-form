@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ApiService } from '../../../service/api.service';
-import { Observable, empty, forkJoin, of } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class ApiResolverService implements Resolve<any> {
         someError: this.apiService.someError(payload2).pipe(catchError((err) => of(undefined))),
         someError2: this.apiService.someError(payload2).pipe(catchError((err) => of(undefined))),
         someError3: this.apiService.someError({code:500}).pipe(catchError((err) => of(undefined))),
-        account2: this.apiService.showAccount(2).pipe(catchError((err) => of(undefined))),
+        account2: this.apiService.showAccount(527).pipe(catchError((err) => of(undefined))),
       }).pipe(
         catchError((err) => of(undefined))
       )

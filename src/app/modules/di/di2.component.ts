@@ -110,11 +110,11 @@ export class My2Component {
 export class HeroBioComponent implements OnInit  {
   @Input() heroId: number;
 
-  constructor(private heroCache: HeroCacheService) { }
+  constructor(private heroCacheService: HeroCacheService) { }
 
-  ngOnInit() { this.heroCache.fetchCachedHero(this.heroId); }
+  ngOnInit() { this.heroCacheService.fetchCachedHero(this.heroId); }
 
-  get hero() { return this.heroCache.hero; }
+  get hero() { return this.heroCacheService.hero; }
 }
 
 @Component({
