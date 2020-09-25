@@ -59,22 +59,25 @@ export class JokeListComponent implements OnInit, AfterContentInit, AfterViewIni
   }
 
   ngOnInit() {
+    // this.jokes[1].toggle();
   }
 
   ngAfterContentInit() {
     console.log(`ngAfterContentInit: jokeContentChild is ${this.jokeContentChild}`);
     console.log(this.jokeContentChild instanceof JokeComponent);
     console.log(this.jokeContentChild);
+    console.log(this.jokeContentChild.myJoke)
     console.log(this.jokeContentChild.myJoke.punchline)
     let jokes = this.jokeContentChildren.toArray();
     console.log(jokes[0].myJoke);
-
   }
 
   ngAfterViewInit() {
     console.log(`ngAfterViewInit: jokeViewChild is ${this.jokeViewChild}`);
     console.log('this.jokeViewChild')
     console.log(this.jokeViewChild)
+    console.log('this.jokeViewChild.myJoke')
+    console.log(this.jokeViewChild.myJoke)
     console.log('this.jokeViewChild.joke.punchline')
     console.log(this.jokeViewChild.myJoke.punchline)
     let jokes: JokeComponent[] = this.jokeViewChildren.toArray();

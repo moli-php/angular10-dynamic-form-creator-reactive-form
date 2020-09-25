@@ -10,25 +10,19 @@ import { ApiService } from 'src/app/service/api.service';
   styleUrls: ['./search-db.component.css']
 })
 export class SearchDbComponent implements OnInit, OnDestroy {
-  public name: string = '';
-  public title: string = '';
-  contentName = new FormControl('');
-  contentTitle = new FormControl('');
+  // public name: string = '';
+  // public title: string = '';
   contentForm: FormGroup = this.formBuilder.group({
-    name: this.contentName,
-    title: this.contentTitle
+    name: new FormControl(''),
+    title: new FormControl('')
   });
-  name2 = new FormControl('');
-  title2 = new FormControl('');
   contentForm2: FormGroup = this.formBuilder.group({
-    name: this.name2,
-    title: this.title2
+    name: new FormControl(''),
+    title: new FormControl('')
   });
-  name3 = new FormControl('');
-  title3 = new FormControl('');
   contentForm3: FormGroup = this.formBuilder.group({
-    name: this.name3,
-    title: this.title3
+    name: new FormControl(''),
+    title: new FormControl('')
   });
   contentObv: any;
   contentData: any;
@@ -45,17 +39,17 @@ export class SearchDbComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.contentObv) {
-      this.contentObv.unsubscribe();
-    }
+    this._unsubscribeContent();
   }
   // can handle empty values
   oneWayWork() {
     this.contentForm.valueChanges.subscribe((val)=>{
+     
       if (!val.name.trim() && !val.title.trim()) {
         this.contentData = [];
         return false;
       }
+      console.log(val)
       this.contentLookup$.next();
     },(err)=> {
       this.loading = false;
@@ -88,7 +82,7 @@ export class SearchDbComponent implements OnInit, OnDestroy {
           return this.contentData;
         }
         return this.apiService.searchContent(values)
-        // adding pipe just for a test to test name and title only
+        // adding pipe just for a test to filter name and title only
         .pipe(
           /**#1 */
           // map(data => {
@@ -128,18 +122,24 @@ export class SearchDbComponent implements OnInit, OnDestroy {
     }
     if (!this.contentForm3.value.name.trim() && !this.contentForm3.value.title.trim()) {
       this.contentData = [];
+      this._unsubscribeContent();
       return this.loading = false;
     }
-    if (this.contentObv) {
-      this.contentObv.unsubscribe();
-    }
+    this._unsubscribeContent();
     this.contentObv = this.apiService.searchContent(this.contentForm3.value).subscribe(res => {
       this.contentData = res;
       this.loading = false;
+      
     }, err => {
       console.log(err)
       this.loading = true;
     })
+  }
+
+  private _unsubscribeContent() {
+    if (this.contentObv) {
+      this.contentObv.unsubscribe();
+    }
   }
 
 
