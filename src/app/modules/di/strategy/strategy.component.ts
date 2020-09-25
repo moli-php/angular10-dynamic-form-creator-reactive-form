@@ -1,16 +1,16 @@
 import { Component, OnInit, Injectable, Optional, InjectionToken } from '@angular/core';
 
-export abstract class IStrategy {
+export abstract class Strategy {
   abstract calculate(a, b): number;
 }
 
-export class PlusStrategy implements IStrategy {
+export class PlusStrategy implements Strategy {
   calculate(a, b): number {
     return a + b;
   }
 }
 
-export class MinusStrategy implements IStrategy {
+export class MinusStrategy implements Strategy {
   calculate(a, b): number {
     return a - b;
   }
@@ -20,7 +20,7 @@ export class MinusStrategy implements IStrategy {
   providedIn: 'root'
 })
 export class StrategyFactory {
-  createStrategy<T extends IStrategy>(c: new() => T): T {
+  createStrategy<T extends Strategy>(c: new() => T): T {
     return new c();
   }
 }
@@ -30,7 +30,7 @@ export class StrategyFactory {
   providedIn: 'root'
 })
 export class StrategyService {
-  constructor(private strategy: IStrategy, private strategyFactory: StrategyFactory) {}
+  constructor(private strategy: Strategy, private strategyFactory: StrategyFactory) {}
   compute(a,b) {
     return this.strategy.calculate(a,b);
   }
@@ -40,7 +40,7 @@ export class StrategyService {
   }
 }
 
-export const REGISTER_STRATEGY = new InjectionToken<IStrategy>('custom strategy');
+export const REGISTER_STRATEGY = new InjectionToken<Strategy>('custom strategy');
 
 @Component({
   selector: 'app-custom',
@@ -65,11 +65,11 @@ export class CustomComponent {
   template: '',
   providers: [
     StrategyService,
-    {provide: IStrategy, useClass: PlusStrategy}]
+    {provide: Strategy, useClass: PlusStrategy}]
  
 })
 export class PlusComponent {
-    constructor(private strategy: IStrategy, private strategyService: StrategyService) {
+    constructor(private strategy: Strategy, private strategyService: StrategyService) {
       console.log('plus strategy')
       console.log(this.strategy.calculate(1,2))
       // the magic on strategyService will only work if injected on the module level as the provider.
@@ -81,16 +81,16 @@ export class PlusComponent {
 @Component({
   selector: 'app-minus',
   template: '',
-  providers: [
-    {provide: IStrategy, useClass: MinusStrategy}
+  providers: [StrategyService,
+    {provide: Strategy, useClass: MinusStrategy}
   ]
 })
 export class MinusComponent {
-    constructor(private stragegy: IStrategy, private strategyFactory: StrategyFactory) {
+    constructor(private stragegy: Strategy, private strategyFactory: StrategyFactory, private strategyService: StrategyService) {
       console.log('minus strategy')
       console.log(this.stragegy.calculate(1,2))
       console.log(this.strategyFactory.createStrategy(MinusStrategy).calculate(8,4));
-
+      console.log(this.strategyService.minusCompute(5,4));
     }
 }
 

@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
 import { Parent2Component } from './parent2/parent2.component';
 import { Child2Component } from './child2/child2.component';
 import { ParentFinderComponent, ChrisComponent, BarryComponent, AliceComponent, CarolComponent } from './parent-finder/parent-finder.component';
-import { StrategyComponent, PlusComponent, MinusComponent, CustomComponent, StrategyService, PlusStrategy, IStrategy } from './strategy/strategy.component';
+import { StrategyComponent, PlusComponent, MinusComponent, CustomComponent, StrategyService, PlusStrategy, Strategy } from './strategy/strategy.component';
 import { PersonComponent, MyComponent, My2Component, HeroContactComponent, HeroBiosComponent, HeroBioComponent,
   HeroBiosAndContactsComponent, OtherContactComponent } from './di2.component';
 
@@ -30,7 +30,7 @@ import { PersonComponent, MyComponent, My2Component, HeroContactComponent, HeroB
   providers: [
     SampleService,
     // StrategyService,
-    // {provide: IStrategy, useClass: PlusStrategy}
+    // {provide: Strategy, useClass: PlusStrategy}
   ]
 })
 export class DiModule { }
