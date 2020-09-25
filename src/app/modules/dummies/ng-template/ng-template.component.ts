@@ -9,6 +9,7 @@ export class NgTemplateComponent implements OnInit {
   isShow: boolean = true;
   isChecked: boolean = false;
   someData: Array<{}> = [];
+  someData2: Array<{}> = [];
 
   constructor() { }
 
@@ -21,6 +22,10 @@ export class NgTemplateComponent implements OnInit {
       {name: "Alexa", gender: "f"},
       {name: "Rey", gender: "m"},
       {name: "Jun", gender: "m"},
+    ];
+
+    this.someData2 = [
+      {type: ''}
     ]
   }
 

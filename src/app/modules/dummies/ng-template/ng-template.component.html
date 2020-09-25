@@ -31,3 +31,25 @@
 <ng-template #showHidden>
 off
 </ng-template>
+
+
+<hr>
+<h4>ngTemplateOutlet simple</h4>
+<div>
+    <h2>my header</h2>
+    <ng-container *ngTemplateOutlet="myReusableTemplate"></ng-container>
+    <h3> my body </h3>
+    <ng-container *ngTemplateOutlet="myReusableTemplate"></ng-container>
+    <h3>my footer</h3>
+    <ng-container *ngTemplateOutlet="myReusableTemplate"></ng-container>
+</div>
+
+<ng-template #myReusableTemplate>
+    <div>
+        <div style="position:absolute;">My logo</div>
+        <img src="/assets/images/peek.jpg" />
+    </div>
+</ng-template>
+
+<hr>
+<h4>ngTemplateOutlet dynamic</h4>

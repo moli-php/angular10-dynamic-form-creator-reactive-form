@@ -93,7 +93,7 @@ export class JokeListComponent implements OnInit, AfterContentInit, AfterViewIni
   styleUrls: ['./children-decorators.component.css']
 })
 export class ChildrenDecoratorsComponent implements OnInit {
-  myJoke: MyJoke = new MyJoke("Joke in the Parent", "Parent joke");
+  myJokeParent: MyJoke = new MyJoke("Joke in the Parent", "Parent joke");
   flag: boolean = true;
 
   constructor() {
