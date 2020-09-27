@@ -11,18 +11,17 @@
 <hr>
 
 <h4>ng-container</h4>
+<h5>boys:</h5>
 <ul>
-
-    <li><h4>boys:</h4></li>
     <ng-container *ngFor="let item of someData">
         <li *ngIf="item.gender === 'm'">{{item.name}}</li>
     </ng-container>
-
-    <li><h4>girls:</h4></li>
+</ul>
+<h5>girls:</h5>
+<ul>
     <ng-container *ngFor="let item of someData">
         <li *ngIf="item.gender !== 'm'">{{item.name}}</li>
     </ng-container>
-
 </ul>
 
 <input type="checkbox" [(ngModel)]="isChecked">
@@ -50,6 +49,3 @@ off
         <img src="/assets/images/peek.jpg" />
     </div>
 </ng-template>
-
-<hr>
-<h4>ngTemplateOutlet dynamic</h4>

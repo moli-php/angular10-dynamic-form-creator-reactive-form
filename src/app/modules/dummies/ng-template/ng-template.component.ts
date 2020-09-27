@@ -23,10 +23,6 @@ export class NgTemplateComponent implements OnInit {
       {name: "Rey", gender: "m"},
       {name: "Jun", gender: "m"},
     ];
-
-    this.someData2 = [
-      {type: ''}
-    ]
   }
 
 }
