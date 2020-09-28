@@ -23,8 +23,7 @@ import { BrowserStorageService, BROWSER_STORAGE } from 'src/app/service/browser-
 import { RouteResolverComponent } from './route-resolver/route-resolver.component';
 import { ChildrenDecoratorsComponent, JokeComponent, JokeListComponent } from './children-decorators/children-decorators.component';
 import { NgTemplateComponent } from './ng-template/ng-template.component';
-
-
+import { NgContainerComponent } from './ng-container/ng-container.component';
 
 
 @NgModule({
@@ -39,7 +38,8 @@ import { NgTemplateComponent } from './ng-template/ng-template.component';
     SearchDbComponent, 
     FormComponent, 
     HttpRxjsComponent, RouteResolverComponent, 
-    ChildrenDecoratorsComponent, JokeComponent, JokeListComponent, NgTemplateComponent
+    ChildrenDecoratorsComponent, JokeComponent, JokeListComponent, NgTemplateComponent, 
+    NgContainerComponent,
   ],
   imports: [
     CommonModule,

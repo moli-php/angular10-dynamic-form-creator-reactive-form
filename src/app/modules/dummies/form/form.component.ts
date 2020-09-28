@@ -35,19 +35,19 @@ export class FormComponent implements OnInit {
     ])
 
   });
-  // get favorites() {
-  //   return this.dynamicForm.get('favorites') as FormArray;
-  // }
+  get favorites() {
+    return this.dynamicForm.get('favorites') as FormArray;
+  }
 
-  // this is same as above
-  favorites = this.dynamicForm.get('favorites') as FormArray;
+  // // this is same as above
+  // favorites = this.dynamicForm.get('favorites') as FormArray;
   
   constructor(private fb: FormBuilder, private el: ElementRef) { }
 
   ngOnInit(): void {
-    this.title.valueChanges.subscribe(val => console.log(val))
-    this.myForm.valueChanges.subscribe(val => console.log(val));
-    this.dynamicForm.valueChanges.subscribe(val => console.log(val))
+    // this.title.valueChanges.subscribe(val => console.log(val))
+    // this.myForm.valueChanges.subscribe(val => console.log(val));
+    // this.dynamicForm.valueChanges.subscribe(val => console.log(val))
     // this.favorites.valueChanges.subscribe((val) => {
     //   console.log(val)
     // });
@@ -56,8 +56,8 @@ export class FormComponent implements OnInit {
   }
 
   onFormSubmit() {
-    console.warn(this.myForm.value);
-    console.warn(this.myForm.valid);
+    // console.warn(this.myForm.value);
+    console.warn('is valid: ' + this.myForm.valid);
     this.myForm.patchValue({
       title: 'new title',
       address: {
@@ -67,14 +67,18 @@ export class FormComponent implements OnInit {
   }
 
   onForm2Submit() {
-    console.warn(this.myFormBuilder.value);
-    console.warn(this.myFormBuilder.valid);
+  //   console.warn(this.myFormBuilder.value);
+    console.warn('is form2 valid: ' + this.myFormBuilder.valid);
     this.myFormBuilder.patchValue({
       title: 'new title',
       address: {
         street: 123
       }
     })
+  }
+
+  onDynamicFormSubmit() {
+    console.log(this.dynamicForm.value);
   }
 
   addFavorite() {
@@ -88,6 +92,7 @@ export class FormComponent implements OnInit {
     // insert new element and set foucs
     if (hasEmptyValues === false) {
        this.favorites.push(this.fb.control(''));
+       console.log(this.favorites.value)
        const latest_index = this.favorites.length - 1;
        window.setTimeout(() => {
          const favoriteElements = this.el.nativeElement.querySelectorAll('[formArrayName="favorites"] input');
@@ -98,9 +103,9 @@ export class FormComponent implements OnInit {
 
   deleteFavorite(id: number) {
     // don't delete when only 1 left
-    if (this.favorites.length > 1) {
+    // if (this.favorites.length > 1) {
       this.favorites.removeAt(id);
-    }
+    // }
     /** its already managed on the view  by [disabled]*/
   }
 
@@ -109,7 +114,6 @@ export class FormComponent implements OnInit {
     if (e.keyCode === 13) {
       this.addFavorite();
     }
-    console.log(e.keyCode);
   }
 
 }

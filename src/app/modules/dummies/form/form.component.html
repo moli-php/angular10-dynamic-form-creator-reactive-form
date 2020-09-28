@@ -7,12 +7,12 @@
 
 <hr />
 
-<h4>bind with form tag by [formGroup] and nested form groups</h4>
+<h3>bind with form tag by [formGroup] and nested form groups</h3>
 <form [formGroup]="myForm" (ngSubmit)="onFormSubmit()">
     <label>Name: <input type="text" formControlName="name" required /></label><br>
     <label>Title: <input type="text" formControlName="title" /></label><br>
     <div formGroupName="address">
-        <h3>Address:</h3>
+        <h4>Address:</h4>
         <label>Street: <input type="text" formControlName="street"/></label><br>
         <label>City: <input type="text" formControlName="city"/></label><br>
         <label>State: <input type="text" formControlName="state"/></label><br>
@@ -24,7 +24,7 @@
 
 <hr>
 
-<h4>using formBuilder with validators</h4>
+<h3>using formBuilder with validators</h3>
 <form [formGroup]="myFormBuilder" (ngSubmit)="onForm2Submit()">
     <label>Name: <input type="text" formControlName="name" required />required</label><br>
     <label>Title: <input type="text" formControlName="title" /></label><br>
@@ -37,15 +37,16 @@
     </div>
     <button>Submit</button>
 </form>
+
 <div>Form Valid: {{myFormBuilder.valid}}</div>
 <div>form values: {{myFormBuilder.value | json}}</div>
 <hr>
 
-<h4>dynamic form</h4>
-<form [formGroup]="dynamicForm">
+<h3>dynamic form</h3>
+<form [formGroup]="dynamicForm" (ngSubmit)="onDynamicFormSubmit()">
     <label>Name: <input type="text" formControlName="name"></label><br>
     <div formArrayName="favorites">
-        <h3>favorites</h3> 
+        <h4>favorites</h4> 
         <button (click)="addFavorite()" type="button">Add favorites</button>
         <div *ngFor="let favorite of favorites.controls; let i=index">
             <!-- The repeated alias template -->
@@ -55,8 +56,12 @@
             </label><button type="button" [disabled]="favorites.length === 1" (click)="deleteFavorite(i)">X</button>
         </div>
     </div>
+    <button>Submit</button>
 </form>
 {{dynamicForm.value | json}}
+
+<hr>
+<h3>NG_VALIDATORS custom validator</h3>
 
 <br><br>
 <a routerLink="/dummies">back</a>

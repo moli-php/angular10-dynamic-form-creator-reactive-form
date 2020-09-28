@@ -17,6 +17,7 @@ import { RouteResolverComponent } from './route-resolver/route-resolver.componen
 import { ApiResolverService } from './route-resolver/api-resolver.service';
 import { ChildrenDecoratorsComponent } from './children-decorators/children-decorators.component';
 import { NgTemplateComponent } from './ng-template/ng-template.component';
+import { NgContainerComponent } from './ng-container/ng-container.component';
 
 
 
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'route-resolver', component: RouteResolverComponent, resolve: { data: ApiResolverService }, data: {title: 'route resolver'} },
   { path: 'children-decorators', component: ChildrenDecoratorsComponent },
   { path: 'ng-template', component: NgTemplateComponent },
+  { path: 'ng-container', component: NgContainerComponent },
 ];
 
 @NgModule({
