@@ -17,7 +17,14 @@ export class ParentComponent implements OnInit {
   ngOnInit(): void {
 
     this.parentChildService.getParentChild().subscribe((parentChild) => this.parentChild = parentChild);
+    this.sampleLog();
 
+  }
+
+  sampleLog() : void {
+    console.log('log');
+    console.error('error');
+    console.warn('warn');
   }
 
 }
