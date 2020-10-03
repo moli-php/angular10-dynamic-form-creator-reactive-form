@@ -1,5 +1,21 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators, FormArray  } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, FormArray, 
+   ValidationErrors } from '@angular/forms';
+
+export function PasswordMatch(password: string, confirmPassword: string): ValidationErrors | null {
+  return (formGroup: FormGroup) => {
+    const passwordControl = formGroup.controls[password];
+    const confirmPasswordControl = formGroup.get(confirmPassword); // .get() is similar
+    confirmPasswordControl.setErrors(null);
+    if (
+      (passwordControl.dirty && confirmPasswordControl.dirty) &&
+      passwordControl.value !== confirmPasswordControl.value
+      ) {
+        confirmPasswordControl.setErrors({notMatch: true})
+    }
+  }
+}
+
 
 @Component({
   selector: 'app-form',
@@ -8,6 +24,10 @@ import { FormGroup, FormControl, FormBuilder, Validators, FormArray  } from '@an
 })
 export class FormComponent implements OnInit {
   title = new FormControl();
+  fieldTypeAdd = new FormControl();
+  addFormGroup = new FormGroup({});
+  addFormCollection = [];
+
   myForm = new FormGroup({
     title: new FormControl(''),
     name: new FormControl(''),
@@ -18,12 +38,13 @@ export class FormComponent implements OnInit {
       street: new FormControl()
     })
   });
+
   myFormBuilder = this.fb.group({
     title: [''],
-    name: [''],
+    name: new FormControl(''),
     address: this.fb.group({
       street: [],
-      zip: ['', Validators.required],
+      zip: ['', [Validators.required, Validators.pattern(/^[0-9]*$/)]],
       city: ['', Validators.minLength(3)],
       state: []
     })
@@ -33,8 +54,19 @@ export class FormComponent implements OnInit {
     favorites: this.fb.array([
       this.fb.control('')
     ])
-
   });
+  myCustomValidationSubmitted: boolean = false;
+  myCustomValidation = this.fb.group(
+    {
+    password: ['', Validators.required],
+    confirmPassword: ['', Validators.required]
+    },
+    {
+      validator: PasswordMatch('password', 'confirmPassword')
+    }
+   
+   
+  )
   get favorites() {
     return this.dynamicForm.get('favorites') as FormArray;
   }
@@ -77,6 +109,13 @@ export class FormComponent implements OnInit {
     })
   }
 
+  get myFormControls() { return this.myCustomValidation.controls;}
+
+  onMyCustomValidationSubmit() {
+    this.myCustomValidationSubmitted = true;
+
+  }
+
   onDynamicFormSubmit() {
     console.log(this.dynamicForm.value);
   }
@@ -116,4 +155,33 @@ export class FormComponent implements OnInit {
     }
   }
 
+  onAdd(values) {
+    const fValues = Object.assign({type: this.fieldTypeAdd.value}, values)
+    // console.log(this.fieldTypeAdd.value)
+    console.log(fValues)
+    this.fieldTypeAdd.reset('')
+    
+    
+    this.addFormGroup.addControl(fValues.key, fValues.required ? this.fb.control('') : this.fb.control('', Validators.required));
+    // console.log()
+    // console.log(this.addFormGroup.value)
+    this.addFormCollection.push(fValues);
+  }
+
+  addFormSubmit() {
+    console.log(this.addFormGroup.value);
+  }
+
+  
+  // toFormGroup(questions: QuestionBase<string>[] ) {
+  //   const group: any = {};
+
+  //   questions.forEach(question => {
+  //     group[question.key] = question.required ? new FormControl(question.value || '', Validators.required)
+  //                                             : new FormControl(question.value || '');
+  //   });
+  //   return new FormGroup(group);
+  // }
+
 }
+// const newFavoriteText = Object.assign({}, this.favoriteDefaultTexts);

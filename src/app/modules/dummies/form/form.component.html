@@ -1,4 +1,4 @@
-<h1>Reactive Form</h1>
+<!-- <h1>Reactive Form</h1>
 
 <h4>simple</h4>
 <label>Title: </label>
@@ -33,24 +33,26 @@
         <label>Street: <input type="text" formControlName="street"/></label><br>
         <label>City: <input type="text" formControlName="city"/>minLength 3</label><br>
         <label>State: <input type="text" formControlName="state"/></label><br>
-        <label>Zip code: <input type="text" formControlName="zip"/>required</label><br>
+        <label>Zip code: <input type="text" formControlName="zip"/>(required,number only)</label><br>
     </div>
     <button>Submit</button>
 </form>
 
 <div>Form Valid: {{myFormBuilder.valid}}</div>
 <div>form values: {{myFormBuilder.value | json}}</div>
-<hr>
+<hr> -->
 
-<h3>dynamic form</h3>
+<!-- <h3>dynamic form</h3>
 <form [formGroup]="dynamicForm" (ngSubmit)="onDynamicFormSubmit()">
     <label>Name: <input type="text" formControlName="name"></label><br>
     <div formArrayName="favorites">
         <h4>favorites</h4> 
         <button (click)="addFavorite()" type="button">Add favorites</button>
-        <div *ngFor="let favorite of favorites.controls; let i=index">
+        <div *ngFor="let favorite of favorites.controls; let i=index"> -->
+
             <!-- The repeated alias template -->
-            <label>
+
+            <!-- <label>
                 favorite {{i+1}}:
               <input type="text" [formControlName]="i" (keypress)="favoriteOnChange($event)">
             </label><button type="button" [disabled]="favorites.length === 1" (click)="deleteFavorite(i)">X</button>
@@ -58,10 +60,45 @@
     </div>
     <button>Submit</button>
 </form>
-{{dynamicForm.value | json}}
+{{dynamicForm.value | json}} -->
+
+<!-- <hr>
+<h3>Adding custom validators reactive form</h3>
+<form [formGroup]="myCustomValidation" (ngSubmit)="onMyCustomValidationSubmit()">
+    <label for="password">Passoword:</label><input type="password" formControlName="password" id="password"><br>
+    <label for="confirmPassword">Confirm Passoword:</label><input type="password" formControlName="confirmPassword" id="confirmPassword"><br>
+    <button>Submit</button>
+</form>
+<div *ngIf="myCustomValidationSubmitted && (myFormControls.confirmPassword.errors)">
+    <div *ngIf="myFormControls.confirmPassword.errors.notMatch">
+        Not Matched!!!
+        error json: {{myFormControls.confirmPassword.errors | json}}<br>
+        error field: {{myFormControls.confirmPassword.errors.notMatch}}<br>
+        error form: {{myCustomValidation.invalid}}<br>
+        form values: {{myCustomValidation.value | json}}<br>
+        error json: {{ myCustomValidation.controls.confirmPassword.errors | json}}
+    </div>
+    <div *ngIf="myFormControls.confirmPassword.errors.required || myFormControls.password?.errors?.required">
+        both are required fields
+    </div>
+</div> -->
+
 
 <hr>
-<h3>NG_VALIDATORS custom validator</h3>
-
+<h3>dynamic form adder |  reactive form</h3>
+<div>
+    <select [formControl]="fieldTypeAdd" #fieldValue>
+        <option value="textbox">textbox</option>
+        <option value="textarea">textarea</option>
+        <option value="select">select</option>
+        <option value="radio">radio</option>
+        <option value="checkbox">checkbox</option>
+    </select>
+    <app-add-form [optionType]="fieldValue.value" (add)="onAdd($event)"></app-add-form>
+</div>
+<form [formGroup]="addFormGroup" (ngSubmit)="addFormSubmit()" *ngIf="addFormCollection.length">
+    <app-create-form *ngFor="let item of addFormCollection" [item]="item" [form]="addFormGroup"></app-create-form>
+    <button>Submit</button>
+</form>
 <br><br>
 <a routerLink="/dummies">back</a>

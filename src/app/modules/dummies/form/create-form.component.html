@@ -1,0 +1,19 @@
+<div [formGroup]="form">
+
+
+<label [attr.for]="item.id">{{item.label}}</label>
+<ng-container [ngSwitch]="item.type">
+
+    
+<input *ngSwitchCase="'textbox'" [formControlName]="item.key" [id]="item.id" />
+       
+</ng-container>
+</div>
+
+<!-- 
+<input *ngSwitchCase="'textbox'" [formControlName]="question.key"
+[id]="question.key" [type]="question.type"> -->
+
+
+<!-- {{item | json}} -->
+

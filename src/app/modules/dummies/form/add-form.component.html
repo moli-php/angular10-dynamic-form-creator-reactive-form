@@ -1,0 +1,11 @@
+<form [formGroup]="addForm" *ngIf="optionType" (ngSubmit)="addSubmit()">
+    <div>
+        key: <input type="text" formControlName="key" required />*<br>
+        id: <input type="text" formControlName="id" required />*<br>
+        label: <input type="text" formControlName="label" required />*<br>
+        required: <input type="checkbox" formControlName="requried" /><br>
+        <button>Add</button>
+    </div>
+</form>
+{{addForm.valid}}
+<!-- <div *ngIf="addForm.valid">Check required fields</div> -->

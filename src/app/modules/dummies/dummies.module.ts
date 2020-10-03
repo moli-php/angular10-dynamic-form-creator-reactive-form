@@ -24,6 +24,8 @@ import { RouteResolverComponent } from './route-resolver/route-resolver.componen
 import { ChildrenDecoratorsComponent, JokeComponent, JokeListComponent } from './children-decorators/children-decorators.component';
 import { NgTemplateComponent } from './ng-template/ng-template.component';
 import { NgContainerComponent } from './ng-container/ng-container.component';
+import { AddFormComponent } from './form/add-form.component';
+import { CreateFormComponent } from './form/create-form.component';
 
 
 @NgModule({
@@ -39,7 +41,7 @@ import { NgContainerComponent } from './ng-container/ng-container.component';
     FormComponent, 
     HttpRxjsComponent, RouteResolverComponent, 
     ChildrenDecoratorsComponent, JokeComponent, JokeListComponent, NgTemplateComponent, 
-    NgContainerComponent,
+    NgContainerComponent, AddFormComponent, CreateFormComponent,
   ],
   imports: [
     CommonModule,
