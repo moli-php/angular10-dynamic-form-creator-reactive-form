@@ -1,4 +1,4 @@
-<!-- <h1>Reactive Form</h1>
+<h1>Reactive Form</h1>
 
 <h4>simple</h4>
 <label>Title: </label>
@@ -40,29 +40,8 @@
 
 <div>Form Valid: {{myFormBuilder.valid}}</div>
 <div>form values: {{myFormBuilder.value | json}}</div>
-<hr> -->
+<hr>
 
-<!-- <h3>dynamic form</h3>
-<form [formGroup]="dynamicForm" (ngSubmit)="onDynamicFormSubmit()">
-    <label>Name: <input type="text" formControlName="name"></label><br>
-    <div formArrayName="favorites">
-        <h4>favorites</h4> 
-        <button (click)="addFavorite()" type="button">Add favorites</button>
-        <div *ngFor="let favorite of favorites.controls; let i=index"> -->
-
-            <!-- The repeated alias template -->
-
-            <!-- <label>
-                favorite {{i+1}}:
-              <input type="text" [formControlName]="i" (keypress)="favoriteOnChange($event)">
-            </label><button type="button" [disabled]="favorites.length === 1" (click)="deleteFavorite(i)">X</button>
-        </div>
-    </div>
-    <button>Submit</button>
-</form>
-{{dynamicForm.value | json}} -->
-
-<!-- <hr>
 <h3>Adding custom validators reactive form</h3>
 <form [formGroup]="myCustomValidation" (ngSubmit)="onMyCustomValidationSubmit()">
     <label for="password">Passoword:</label><input type="password" formControlName="password" id="password"><br>
@@ -81,21 +60,42 @@
     <div *ngIf="myFormControls.confirmPassword.errors.required || myFormControls.password?.errors?.required">
         both are required fields
     </div>
-</div> -->
+</div>
+
+<hr>
+<h3>dynamic form</h3>
+<form [formGroup]="dynamicForm" (ngSubmit)="onDynamicFormSubmit()">
+    <label>Name: <input type="text" formControlName="name"></label><br>
+    <div formArrayName="favorites">
+        <h4>favorites</h4> 
+        <button (click)="addFavorite()" type="button">Add favorites</button>
+        <div *ngFor="let _ of favorites.controls; let i=index">
+            <label>
+                favorite {{i+1}}:
+              <input type="text" [formControlName]="i" (keypress)="favoriteOnChange($event)">
+            </label><button type="button" [disabled]="favorites.length === 1" (click)="deleteFavorite(i)">X</button>
+        </div>
+    </div>
+    <button>Submit</button>
+</form>
+<!-- {{dynamicForm.value | json}} -->
 
 
 <hr>
 <h3>dynamic form adder |  reactive form</h3>
 <div>
-    <select [formControl]="fieldTypeAdd" #fieldValue>
+    <select [formControl]="fieldTypeAdd" #optionField>
         <option value="textbox">textbox</option>
         <option value="textarea">textarea</option>
         <option value="select">select</option>
         <option value="radio">radio</option>
         <option value="checkbox">checkbox</option>
     </select>
-    <app-add-form [optionType]="fieldValue.value" (add)="onAdd($event)"></app-add-form>
+    <hr *ngIf="optionField.value">
+    <app-add-form [optionType]="optionField.value" (add)="onAdd($event)"></app-add-form>
+    <!-- <app-add-form [optionType]="'checkbox'" (add)="onAdd($event)"></app-add-form> -->
 </div>
+<hr *ngIf="optionField.value">
 <form [formGroup]="addFormGroup" (ngSubmit)="addFormSubmit()" *ngIf="addFormCollection.length">
     <app-create-form *ngFor="let item of addFormCollection" [item]="item" [form]="addFormGroup"></app-create-form>
     <button>Submit</button>

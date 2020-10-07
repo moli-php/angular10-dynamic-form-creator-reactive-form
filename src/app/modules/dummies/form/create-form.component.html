@@ -1,14 +1,44 @@
 <div [formGroup]="form">
 
 
-<label [attr.for]="item.id">{{item.label}}</label>
+<label [attr.for]="item.key">{{item.label}}: </label>
 <ng-container [ngSwitch]="item.type">
 
-    
-<input *ngSwitchCase="'textbox'" [formControlName]="item.key" [id]="item.id" />
-       
+    <span style="margin-left:10px">
+        <input *ngSwitchCase="'textbox'" [formControlName]="item.key" [id]="item.key" />
+        <textarea *ngSwitchCase="'textarea'" [formControlName]="item.key" [id]="item.key"></textarea>
+
+        <ng-container *ngSwitchCase="'checkbox'">
+            <input *ngIf="item.checkboxOption === 'single'" [formControlName]="item.key" [id]="item.key" type="checkbox" />
+
+            <ng-container *ngIf="item.checkboxOption === 'multiple'">
+                <div [formArrayName]="item.key">
+                    <ng-container *ngFor="let _ of item.groupCheckOptions; index as i">
+                        <label>{{_.label}} <input type="checkbox" [formControlName]="i" [value]="_.value" /></label>&nbsp;&nbsp;
+                    </ng-container>
+                </div>
+               
+
+            </ng-container>
+
+        </ng-container>
+    </span>
+
 </ng-container>
 </div>
+
+
+
+
+
+<!-- 
+    <fieldset>      
+        <legend>What is Your Favorite Pet?</legend>    
+        <input type="checkbox" name="favorite_pet" value="Cats">Cats   
+        <input type="checkbox" name="favorite_pet" value="Dogs">Dogs   
+        <input type="checkbox" name="favorite_pet" value="Birds">Birds 
+        
+    </fieldset>   -->
 
 <!-- 
 <input *ngSwitchCase="'textbox'" [formControlName]="question.key"

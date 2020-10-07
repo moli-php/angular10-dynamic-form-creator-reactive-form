@@ -55,6 +55,7 @@ export class FormComponent implements OnInit {
       this.fb.control('')
     ])
   });
+
   myCustomValidationSubmitted: boolean = false;
   myCustomValidation = this.fb.group(
     {
@@ -68,7 +69,10 @@ export class FormComponent implements OnInit {
    
   )
   get favorites() {
-    return this.dynamicForm.get('favorites') as FormArray;
+    let a = this.dynamicForm.get('favorites') as FormArray;
+    // console.log('here')
+    // console.log(a.controls)
+    return a;
   }
 
   // // this is same as above
@@ -128,7 +132,7 @@ export class FormComponent implements OnInit {
           hasEmptyValues = true;
         }
     });
-    // insert new element and set foucs
+    // insert new element and set focus
     if (hasEmptyValues === false) {
        this.favorites.push(this.fb.control(''));
        console.log(this.favorites.value)
@@ -155,14 +159,32 @@ export class FormComponent implements OnInit {
     }
   }
 
+  formArrayHandler: any
+
   onAdd(values) {
     const fValues = Object.assign({type: this.fieldTypeAdd.value}, values)
     // console.log(this.fieldTypeAdd.value)
     console.log(fValues)
     this.fieldTypeAdd.reset('')
     
-    
-    this.addFormGroup.addControl(fValues.key, fValues.required ? this.fb.control('') : this.fb.control('', Validators.required));
+    if (fValues.key) {
+      // this.addFormGroup.addControl(fValues.key, fValues.required ? this.fb.control('', Validators.required) : this.fb.control(''));
+    }
+    if (fValues.checkboxOption === 'multiple') {
+      // fValues.groupCheckOptions.forEach(item => {
+      //   console.log(item.key)
+        
+      //     this.addFormGroup.addControl(item.key, this.fb.control(''));
+      // });
+      const a = fValues.groupCheckOptions.map(item => {return item.key})
+      console.log(a)
+      this.addFormGroup.addControl(fValues.key, this.fb.array(a) )
+      console.log(this.addFormGroup.controls)
+      // this.formArrayHandler = this.addFormGroup.get(fValues.key) as FormArray;
+      // this.fb.array([
+      //   this.fb.control('')
+      // ])
+    }
     // console.log()
     // console.log(this.addFormGroup.value)
     this.addFormCollection.push(fValues);

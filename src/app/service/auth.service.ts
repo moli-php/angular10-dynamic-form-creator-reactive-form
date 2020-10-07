@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../interface/user';
 import { Router } from '@angular/router';
+import { ENV_CONSTANTS } from '../shared/EnvConstant';
 
 
 @Injectable({
@@ -28,7 +29,7 @@ export class AuthService {
   }
 
   public login(reqData): Observable<any> {
-    return this.http.post(this.endPoint + 'dummy/login', JSON.stringify(reqData), this.options);
+    return this.http.post(ENV_CONSTANTS.lv5EndPoint + 'dummy/login', JSON.stringify(reqData), this.options);
   }
 
   public getUserInfo(): User {
