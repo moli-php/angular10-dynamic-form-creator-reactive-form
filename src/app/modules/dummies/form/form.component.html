@@ -18,6 +18,8 @@
         <label>State: <input type="text" formControlName="state"/></label><br>
         <label>Zip code: <input type="text" formControlName="zip"/></label><br>
     </div>
+    Gender: <label>male <input type="radio" formControlName="gender" value="male" /></label>
+            <label>female <input type="radio" formControlName="gender" value="female" /></label>
     <button>Submit</button>
 </form>
 <div>form values: {{myForm.value | json}}</div>
@@ -81,24 +83,3 @@
 <!-- {{dynamicForm.value | json}} -->
 
 
-<hr>
-<h3>dynamic form adder |  reactive form</h3>
-<div>
-    <select [formControl]="fieldTypeAdd" #optionField>
-        <option value="textbox">textbox</option>
-        <option value="textarea">textarea</option>
-        <option value="select">select</option>
-        <option value="radio">radio</option>
-        <option value="checkbox">checkbox</option>
-    </select>
-    <hr *ngIf="optionField.value">
-    <app-add-form [optionType]="optionField.value" (add)="onAdd($event)"></app-add-form>
-    <!-- <app-add-form [optionType]="'checkbox'" (add)="onAdd($event)"></app-add-form> -->
-</div>
-<hr *ngIf="optionField.value">
-<form [formGroup]="addFormGroup" (ngSubmit)="addFormSubmit()" *ngIf="addFormCollection.length">
-    <app-create-form *ngFor="let item of addFormCollection" [item]="item" [form]="addFormGroup"></app-create-form>
-    <button>Submit</button>
-</form>
-<br><br>
-<a routerLink="/dummies">back</a>

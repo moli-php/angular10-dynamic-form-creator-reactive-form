@@ -1,0 +1,59 @@
+<form [formGroup]="addForm" *ngIf="optionType" (ngSubmit)="createForm()">
+
+    <div *ngIf="optionType  === 'textbox' || optionType === 'textarea'">
+        <ng-container *ngTemplateOutlet="basicFieldsTemplate"></ng-container>
+        required: <input type="checkbox" formControlName="requried" /><br>
+    </div>
+
+    <div *ngIf="optionType === 'checkbox'">
+        <select formControlName="checkboxOption" #optionField>
+            <option value="single">Single</option>
+            <option value="multiple">Multiple</option>
+        </select>
+        <div>
+            <ng-container *ngTemplateOutlet="basicFieldsTemplate"></ng-container>
+        </div>
+        <ng-container *ngIf="optionField.value === 'multiple'" [ngTemplateOutlet]="optionsTemplate" [ngTemplateOutletContext]="{ $implicit: addForm }"></ng-container>
+    </div>
+
+    <div *ngIf="optionType === 'radio'">
+        <div>
+            <ng-container *ngTemplateOutlet="basicFieldsTemplate"></ng-container>
+        </div>
+        <ng-container [ngTemplateOutlet]="optionsTemplate" [ngTemplateOutletContext]="{ $implicit: addForm }"></ng-container>
+    </div>
+
+    <div *ngIf="optionType === 'select'">
+        Multiple: <input type="checkbox" formControlName="selectboxOption" />
+        <div>
+            <ng-container *ngTemplateOutlet="basicFieldsTemplate"></ng-container>
+        </div>
+        <ng-container [ngTemplateOutlet]="optionsTemplate" [ngTemplateOutletContext]="{ $implicit: addForm }"></ng-container>
+    </div>
+        
+    <hr>
+    <button style="margin-left:250px;">create field</button>
+
+    <!-- reusable templates-->
+    <ng-template #optionsTemplate let-form>
+        <div formArrayName="optionArray">
+            <ng-container *ngFor="let _ of form.get('optionArray').controls; index as i">
+                <div [formGroupName]="i" style="border: 1px gray solid;">
+                    <div>{{i+1}}</div>
+                    <label>label: <input formControlName="label" />*</label><br>
+                    <label>value: <input formControlName="value" />*</label><br><br>
+                </div>
+            </ng-container>
+            <button (click)="addNewOption('optionArray')" type="button">+Add</button>
+        </div>
+    </ng-template>
+    
+    <ng-template #basicFieldsTemplate>
+        key: <input type="text" formControlName="key" required />*<br>
+        label: <input type="text" formControlName="label" required />*<br>
+    </ng-template>
+    <!-- reusable templates end ************ -->
+    
+</form>
+
+

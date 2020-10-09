@@ -1,7 +1,7 @@
 <div [formGroup]="form">
 
 
-<label [attr.for]="item.key">{{item.label}}: </label>
+<label [attr.for]="item.key">{{item.label}} </label>
 <ng-container [ngSwitch]="item.type">
 
     <span style="margin-left:10px">
@@ -10,17 +10,27 @@
 
         <ng-container *ngSwitchCase="'checkbox'">
             <input *ngIf="item.checkboxOption === 'single'" [formControlName]="item.key" [id]="item.key" type="checkbox" />
-
             <ng-container *ngIf="item.checkboxOption === 'multiple'">
-                <div [formArrayName]="item.key">
-                    <ng-container *ngFor="let _ of item.groupCheckOptions; index as i">
+                <span [formArrayName]="item.key">
+                    <ng-container *ngFor="let _ of item.optionArray; index as i">
                         <label>{{_.label}} <input type="checkbox" [formControlName]="i" [value]="_.value" /></label>&nbsp;&nbsp;
                     </ng-container>
-                </div>
-               
-
+                </span>
             </ng-container>
+        </ng-container>
 
+        <ng-container *ngSwitchCase="'radio'">
+                <ng-container *ngFor="let _ of item.optionArray; index as i">
+                    <label>{{_.label}} <input type="radio" [formControlName]="item.key" [value]="_.value" /></label>&nbsp;&nbsp;
+                </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'select'">
+            <ng-container>
+                <select [formControlName]="item.key" [multiple]="item.selectboxOption">
+                    <option *ngFor="let _ of item.optionArray; index as i" [value]="_.value">{{_.label}}</option>
+                </select>
+            </ng-container>
         </ng-container>
     </span>
 

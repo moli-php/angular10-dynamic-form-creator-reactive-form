@@ -1,6 +1,8 @@
+import { unescapeIdentifier } from '@angular/compiler';
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray, 
-   ValidationErrors } from '@angular/forms';
+   ValidationErrors, NgForm } from '@angular/forms';
+import { min } from 'rxjs/operators';
 
 export function PasswordMatch(password: string, confirmPassword: string): ValidationErrors | null {
   return (formGroup: FormGroup) => {
@@ -16,7 +18,6 @@ export function PasswordMatch(password: string, confirmPassword: string): Valida
   }
 }
 
-
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -24,9 +25,6 @@ export function PasswordMatch(password: string, confirmPassword: string): Valida
 })
 export class FormComponent implements OnInit {
   title = new FormControl();
-  fieldTypeAdd = new FormControl();
-  addFormGroup = new FormGroup({});
-  addFormCollection = [];
 
   myForm = new FormGroup({
     title: new FormControl(''),
@@ -36,7 +34,8 @@ export class FormComponent implements OnInit {
       city: new FormControl(),
       state: new FormControl(),
       street: new FormControl()
-    })
+    }),
+    gender: new FormControl()
   });
 
   myFormBuilder = this.fb.group({
@@ -78,9 +77,95 @@ export class FormComponent implements OnInit {
   // // this is same as above
   // favorites = this.dynamicForm.get('favorites') as FormArray;
   
-  constructor(private fb: FormBuilder, private el: ElementRef) { }
+  constructor(private fb: FormBuilder, private el: ElementRef) { 
+    // const form = [
+    //   {fav: [true, false, "green"]},
+    //   {fav2: [false, "dog", "cat"]},
+    // ];
+    // const data = [
+    //   {
+    //     checkboxOption: "multiple",
+    //     groupCheckOptions: [
+    //       {label: "blue", key: "blue", value: "blue"},
+    //       {label: "red", key: "red", value: "red"},
+    //       {label: "green", key: "green", value: "green"},
+    //     ],
+    //     id: null,
+    //     key: "fav",
+    //     label: "fav",
+    //     requried: null,
+    //     type: "checkbox"
+    //   },
+    //   {
+    //     checkboxOption: "multiple",
+    //     groupCheckOptions: [
+    //       {label: "fish", key: "fish", value: "fish"},
+    //       {label: "dog", key: "dog", value: "dog"},
+    //       {label: "cat", key: "cat", value: "cat"},
+    //     ],
+    //     id: null,
+    //     key: "fav2",
+    //     label: "fav2",
+    //     requried: null,
+    //     type: "checkbox"
+    //   }
+    // ]
+
+  }
 
   ngOnInit(): void {
+    let form = this.fb.group({});
+    const fav1 = this.fb.array(["fish", false, true]);
+    const fav2 = this.fb.array([true, true, false]);
+    form.addControl('fav1', fav1);
+    form.addControl('fav2', fav2);
+
+    const data = [
+      {
+        checkboxOption: "multiple",
+        groupCheckOptions: [
+          {label: "blue", key: "blue", value: "blue"},
+          {label: "red", key: "red", value: "red"},
+          {label: "green", key: "green", value: "green"},
+        ],
+        id: null,
+        key: "fav1",
+        label: "fav1",
+        requried: null,
+        type: "checkbox"
+      },
+      {
+        checkboxOption: "multiple",
+        groupCheckOptions: [
+          {label: "fish", key: "fish", value: "fish"},
+          {label: "dog", key: "dog", value: "dog"},
+          {label: "cat", key: "cat", value: "cat"},
+        ],
+        id: null,
+        key: "fav2",
+        label: "fav2",
+        requried: null,
+        type: "checkbox"
+      }
+    ]
+
+    data.forEach((v,i) => {
+      const a = form.get(v.key);
+      const handler = [];
+      a.value.map((mv,mi) => {
+        if (mv) {
+          //  a[mi] = v.groupCheckOptions[mi].value;
+           handler.push(v.groupCheckOptions[mi].value)
+        }
+        
+      })
+      form.setControl(v.key, this.fb.array(handler))
+      // console.log(handler)
+      
+    })
+    console.log(form.value)
+
+  
     // this.title.valueChanges.subscribe(val => console.log(val))
     // this.myForm.valueChanges.subscribe(val => console.log(val));
     // this.dynamicForm.valueChanges.subscribe(val => console.log(val))
@@ -94,6 +179,7 @@ export class FormComponent implements OnInit {
   onFormSubmit() {
     // console.warn(this.myForm.value);
     console.warn('is valid: ' + this.myForm.valid);
+    console.log(this.myForm.value)
     this.myForm.patchValue({
       title: 'new title',
       address: {
@@ -159,40 +245,18 @@ export class FormComponent implements OnInit {
     }
   }
 
-  formArrayHandler: any
 
-  onAdd(values) {
-    const fValues = Object.assign({type: this.fieldTypeAdd.value}, values)
-    // console.log(this.fieldTypeAdd.value)
-    console.log(fValues)
-    this.fieldTypeAdd.reset('')
-    
-    if (fValues.key) {
-      // this.addFormGroup.addControl(fValues.key, fValues.required ? this.fb.control('', Validators.required) : this.fb.control(''));
-    }
-    if (fValues.checkboxOption === 'multiple') {
-      // fValues.groupCheckOptions.forEach(item => {
-      //   console.log(item.key)
-        
-      //     this.addFormGroup.addControl(item.key, this.fb.control(''));
-      // });
-      const a = fValues.groupCheckOptions.map(item => {return item.key})
-      console.log(a)
-      this.addFormGroup.addControl(fValues.key, this.fb.array(a) )
-      console.log(this.addFormGroup.controls)
-      // this.formArrayHandler = this.addFormGroup.get(fValues.key) as FormArray;
-      // this.fb.array([
-      //   this.fb.control('')
-      // ])
-    }
-    // console.log()
-    // console.log(this.addFormGroup.value)
-    this.addFormCollection.push(fValues);
-  }
 
-  addFormSubmit() {
-    console.log(this.addFormGroup.value);
-  }
+/*
+checkboxOption: "multiple"
+groupCheckOptions: (2) [{…}, {…}]
+id: null
+key: "fav"
+label: "fav"
+requried: null
+type: "checkbox"
+
+*/
 
   
   // toFormGroup(questions: QuestionBase<string>[] ) {

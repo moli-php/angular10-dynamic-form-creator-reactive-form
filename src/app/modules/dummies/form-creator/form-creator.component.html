@@ -1,0 +1,19 @@
+<h1>dynamic form creator |  reactive form</h1>
+<div>
+    <select [formControl]="fieldTypeAdd" #optionField>
+        <option value="textbox">textbox</option>
+        <option value="textarea">textarea</option>
+        <option value="select">select</option>
+        <option value="radio">radio</option>
+        <option value="checkbox">checkbox</option>
+    </select>
+    <hr>
+    <app-add-form [optionType]="optionField.value" (add)="createForm($event)"></app-add-form>
+</div>
+<hr *ngIf="optionField.value">
+<form [formGroup]="addFormGroup" (ngSubmit)="addFormSubmit()" *ngIf="addFormCollection.length">
+    <app-create-form *ngFor="let item of addFormCollection" [item]="item" [form]="addFormGroup"></app-create-form>
+    <button>Submit</button>
+</form>
+<br><br>
+<a routerLink="/dummies">back</a>

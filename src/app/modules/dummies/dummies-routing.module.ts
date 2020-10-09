@@ -18,6 +18,7 @@ import { ApiResolverService } from './route-resolver/api-resolver.service';
 import { ChildrenDecoratorsComponent } from './children-decorators/children-decorators.component';
 import { NgTemplateComponent } from './ng-template/ng-template.component';
 import { NgContainerComponent } from './ng-container/ng-container.component';
+import { FormCreatorComponent } from './form-creator/form-creator.component';
 
 
 
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'children-decorators', component: ChildrenDecoratorsComponent },
   { path: 'ng-template', component: NgTemplateComponent },
   { path: 'ng-container', component: NgContainerComponent },
+  { path: 'form-creator', component: FormCreatorComponent },
 ];
 
 @NgModule({

@@ -5,7 +5,7 @@ import { FormGroup, FormArray } from '@angular/forms';
   selector: 'app-create-form',
   templateUrl: './create-form.component.html',
 })
-export class CreateFormComponent implements OnInit, AfterContentInit {
+export class CreateFormComponent implements OnInit {
   @Input() item: any;
   @Input() form: FormGroup;
   aa: any;
@@ -15,14 +15,7 @@ export class CreateFormComponent implements OnInit, AfterContentInit {
     // this.item.key
   }
 
-  ngAfterContentInit(): void {
-    // this.aa = this.form.get('aa') as FormArray;
-  }
-
   ngOnInit(): void {
-    // console.log(this.item)
-    // this.aa = this.form.get('aa') as FormArray;
-    // console.log(this.form.get('firtname'))
     console.log(this.form.controls)
   }
 
